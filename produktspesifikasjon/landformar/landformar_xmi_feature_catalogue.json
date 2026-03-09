@@ -1,0 +1,1051 @@
+[
+  {
+    "name": "LandformFlate",
+    "description": "Omfatter mer eller mindre distinkte områder med terrengformer, som kan gis en felles karakteristikk på grunnlag av egenskaper som er forårsaket av landformdannende (geomorfologiske) prosesser",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "Flate",
+        "description": "objektets utstrekning",
+        "cardinality": "1"
+      },
+      {
+        "name": "NiN_Landform",
+        "type": "NiN_Landform",
+        "description": "NiN kode landformenhet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3AB-DG Dødisgrop",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG</u></font></a> Forsenkning dannet ved nedsmelting av stor isklump begravd i løsmasser"
+            },
+            {
+              "value": "3AR-DE Delta",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE</u></font></a> Avsetning av elvetransportert materiale omkring elvemunning i stillestående vann"
+            },
+            {
+              "value": "3ER-RL Leirravine",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL</u></font></a> Liten, skarpt nedskåret V-dal, ofte med bratt lengdeprofil, gravd ut av rennende vann i marint leirsediment"
+            },
+            {
+              "value": "3ER-JP Jordpyramide",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP</u></font></a> Søyleform i hardpakket morene"
+            },
+            {
+              "value": "3ML-LS Leirskred(grop)",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS</u></font></a> Grop etter kvikk-leirskred (leirfall)"
+            }
+          ],
+          "definition": "NiN kode landformenhet",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Landformgruppe",
+        "type": "NiN_Landformgruppe",
+        "description": "NiN kode landformgruppe. Samling av en eller flere spesifikke landformenheter med klare fellestrekk.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3ER Erosjonsformer knyttet til rennende vann",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER"
+            },
+            {
+              "value": "3ML Landformer knyttet til massebevegelse på land",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS\"><font color=\"#467886\"><u>http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML</u></font></a>"
+            },
+            {
+              "value": "3AB Avsetningsformer knyttet til breer",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB"
+            },
+            {
+              "value": "3AR Avsetningsformer knyttet til rennende vann",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR"
+            }
+          ],
+          "definition": "NiN kode landformgruppe. Samling av en eller flere spesifikke landformenheter med klare fellestrekk",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Versjon",
+        "type": "NiN_Versjon",
+        "description": "NiN versjon",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "2.3",
+              "label": "NiN versjon 2.3"
+            },
+            {
+              "value": "3.0",
+              "label": "NiN versjon 3.0"
+            }
+          ],
+          "definition": "NiN versjon",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "egnetMålestokk",
+        "type": "Integer",
+        "description": "Beskriver det målestokksområdet hvor dataene er best egnet. Egenskapen viser målestokktallet, eksempel: 1:50 000 = 50000.\nObjekter kan være utvalgt, plassert eller generalisert i forhold til egnet målestokk.\nDenne egenskapen kan benyttes for å velge hvilke objekter som skal tegnes ut i ulike målestokker.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "geolPåvisningstype",
+        "type": "GeolPåvisningstype",
+        "description": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Ikke spesifisert",
+              "label": "Ikke spesifisert"
+            },
+            {
+              "value": "Sikker påvisning/observasjon",
+              "label": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt"
+            },
+            {
+              "value": "Usikker påvisning/observasjon",
+              "label": "Ikke påvist/observert men antatt avgrensning/registrering av objekt"
+            },
+            {
+              "value": "Konstruert avgrensning",
+              "label": "Tilfeldig plassert avgrensning og meget usikker.  Benyttes blant annet under vann- eller breoverflater"
+            },
+            {
+              "value": "Geofysisk tolket grense",
+              "label": "Avgrensning basert på geofysiske indikasjoner"
+            },
+            {
+              "value": "Dårlig synlig avgrensning i terrenget",
+              "label": "Basert på generalisert tolkning av objekter med små innbyrdes variasjoner (f.eks. skille mellom tynt humusdekke og bart fjell, eller mellom to svært like bergarter)"
+            },
+            {
+              "value": "Overgangsmessig grense",
+              "label": "Glidende overgang mellom to bergarter,  jordarter o.l."
+            },
+            {
+              "value": "Tolket avgrensning/registrering",
+              "label": "Avgrensninger av geologisk objekt eller delobjekt fremkommet ved generalisering, samtolkning eller aggregering"
+            },
+            {
+              "value": "Flyfototolket objekt eller delobjekt",
+              "label": "Flyfototolket objekt eller delobjekt"
+            },
+            {
+              "value": "Observasjon med usikker geografisk beliggenhet",
+              "label": "Observasjon med usikker geografisk beliggenhet"
+            },
+            {
+              "value": "Avgrensning ikke basert på geologi",
+              "label": "Der f.eks. en administrativ grense eller kystkontur har bidratt til avgrensning av et geologisk objekt"
+            },
+            {
+              "value": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser"
+            },
+            {
+              "value": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på seismikk",
+              "label": "Avgrensning basert på seismikk"
+            },
+            {
+              "value": "Avgrensning basert på detaljerte dybdedata",
+              "label": "Avgrensning ved bruk av multistråleekkolodd eller interferometrisk sonar"
+            },
+            {
+              "value": "Avgrensning basert på backscatter data/sidescan.sonar",
+              "label": "Avgrensning basert på bunnreflektivitet/data fra sidescan.sonar"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på flere metoder/datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper"
+            },
+            {
+              "value": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video"
+            },
+            {
+              "value": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l."
+            },
+            {
+              "value": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon",
+              "label": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold"
+            }
+          ],
+          "definition": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen"
+        }
+      },
+      {
+        "name": "NiN_Variabel",
+        "type": "NiN_Variabel",
+        "description": "Gjelder per i dag kun delta og dødisgrop. Variablen blir brukt i kartlegging for å skille en underkategori fra hovedtypen",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Fossilt",
+              "label": "Fossilt"
+            },
+            {
+              "value": "I sortert materiale",
+              "label": "I sortert materiale"
+            }
+          ],
+          "definition": "Gjelder per i dag kun delta og dødisgrop. Variablen blir brukt i kartlegging for å skille en underkategori fra hovedtypen",
+          "asDictionary": "false"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "FellesegenskaperLandform"
+      ],
+      "associations": [
+        {
+          "target": "Geotopvurdering",
+          "role": "Geotopvurdering",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "FellesegenskaperLandform",
+    "description": "abstrakt objekttype som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper\n\nMerknad:\nSpesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.",
+    "attributes": [
+      {
+        "name": "førsteDigitaliseringsdato",
+        "type": "DateTime",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert\n\nMerknad:\nførsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess.\nEventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "datauttaksdato",
+        "type": "DateTime",
+        "description": "dato for uttak fra en database\n\nMerknad:\nSkiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "opphav",
+        "type": "CharacterString",
+        "description": "referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\n\nMerknad:\nKan også beskrive navn på person og årsak til oppdatering",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "prosesshistorie",
+        "type": "CharacterString",
+        "description": "beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene\n\nMerknad:\nProsesshistorie vil kunne inneholde informasjon om transformasjoner. Hva slags informasjon som angis er ofte gitt i andre standarder, f.eks kvalitet og kvalitetsikring.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "DateTime",
+        "description": "tidspunkt for siste endring på objektet\n\nMerknad:\nOppdateringsdato kan være forskjellig fra datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "identifikasjon",
+        "type": "Identifikasjon",
+        "description": "unik identifikasjon av et objekt",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "lokalId",
+            "type": "CharacterString",
+            "description": "lokal identifikator av et objekt\n\nMerknad: Det er dataleverendørens ansvar å sørge for at den lokale identifikatoren er unik innenfor navnerommet.",
+            "cardinality": "1"
+          },
+          {
+            "name": "navnerom",
+            "type": "CharacterString",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt, anbefales å være en http-URI\n\nEksempel: http://data.geonorge.no/SentraltStedsnavnsregister/1.0\n\nMerknad : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og må være registrert i data.geonorge.no eller data.norge.no",
+            "cardinality": "1"
+          },
+          {
+            "name": "versjonId",
+            "type": "CharacterString",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  },
+  {
+    "name": "LandformLinje",
+    "description": "Omfatter geologisk kartlagte linjer for enkelte av landformene",
+    "attributes": [
+      {
+        "name": "grense",
+        "type": "Kurve",
+        "description": "forløp som følger overgang mellom ulike fenomener",
+        "cardinality": "1"
+      },
+      {
+        "name": "NiN_Landform",
+        "type": "NiN_Landform",
+        "description": "NiN kode landformenhet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3AB-DG Dødisgrop",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG</u></font></a> Forsenkning dannet ved nedsmelting av stor isklump begravd i løsmasser"
+            },
+            {
+              "value": "3AR-DE Delta",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE</u></font></a> Avsetning av elvetransportert materiale omkring elvemunning i stillestående vann"
+            },
+            {
+              "value": "3ER-RL Leirravine",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL</u></font></a> Liten, skarpt nedskåret V-dal, ofte med bratt lengdeprofil, gravd ut av rennende vann i marint leirsediment"
+            },
+            {
+              "value": "3ER-JP Jordpyramide",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP</u></font></a> Søyleform i hardpakket morene"
+            },
+            {
+              "value": "3ML-LS Leirskred(grop)",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS</u></font></a> Grop etter kvikk-leirskred (leirfall)"
+            }
+          ],
+          "definition": "NiN kode landformenhet",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Landformgruppe",
+        "type": "NiN_Landformgruppe",
+        "description": "NiN kode landformgruppe. Samling av en eller flere spesifikke landformenheter med klare fellestrekk.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3ER Erosjonsformer knyttet til rennende vann",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER"
+            },
+            {
+              "value": "3ML Landformer knyttet til massebevegelse på land",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS\"><font color=\"#467886\"><u>http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML</u></font></a>"
+            },
+            {
+              "value": "3AB Avsetningsformer knyttet til breer",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB"
+            },
+            {
+              "value": "3AR Avsetningsformer knyttet til rennende vann",
+              "label": "https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR"
+            }
+          ],
+          "definition": "NiN kode landformgruppe. Samling av en eller flere spesifikke landformenheter med klare fellestrekk",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Versjon",
+        "type": "NiN_Versjon",
+        "description": "NiN versjon",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "2.3",
+              "label": "NiN versjon 2.3"
+            },
+            {
+              "value": "3.0",
+              "label": "NiN versjon 3.0"
+            }
+          ],
+          "definition": "NiN versjon",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Variabel",
+        "type": "NiN_Variabel",
+        "description": "Gjelder per i dag mest fossilt delta, for å skille det fra hovedtypen delta",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Fossilt",
+              "label": "Fossilt"
+            },
+            {
+              "value": "I sortert materiale",
+              "label": "I sortert materiale"
+            }
+          ],
+          "definition": "Gjelder per i dag kun delta og dødisgrop. Variablen blir brukt i kartlegging for å skille en underkategori fra hovedtypen",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "egnetMålestokk",
+        "type": "Integer",
+        "description": "Beskriver det målestokksområdet hvor dataene er best egnet. Egenskapen viser målestokktallet, eksempel: 1:50 000 = 50000.\nObjekter kan være utvalgt, plassert eller generalisert i forhold til egnet målestokk.\nDenne egenskapen kan benyttes for å velge hvilke objekter som skal tegnes ut i ulike målestokker.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kvFormLinjetype",
+        "type": "KvFormLinjetype",
+        "description": "kvartærgeologiske formelementlinjer",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "definition": "kvartærgeologiske formelementlinjer\n\nMerknad: Linjetema på kvartærgeologiske kart. Viser former skapt under isavsmeltingen, elve-/bekkeformer, strandformer eller skredformer mm. Ved flere av linjesymbolene må en ta hensyn til digitaliseringsretningen for å få symbolet riktig",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/geologi/løsmasse/kvformlinjetype"
+        }
+      },
+      {
+        "name": "geolPåvisningstype",
+        "type": "GeolPåvisningstype",
+        "description": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Ikke spesifisert",
+              "label": "Ikke spesifisert"
+            },
+            {
+              "value": "Sikker påvisning/observasjon",
+              "label": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt"
+            },
+            {
+              "value": "Usikker påvisning/observasjon",
+              "label": "Ikke påvist/observert men antatt avgrensning/registrering av objekt"
+            },
+            {
+              "value": "Konstruert avgrensning",
+              "label": "Tilfeldig plassert avgrensning og meget usikker.  Benyttes blant annet under vann- eller breoverflater"
+            },
+            {
+              "value": "Geofysisk tolket grense",
+              "label": "Avgrensning basert på geofysiske indikasjoner"
+            },
+            {
+              "value": "Dårlig synlig avgrensning i terrenget",
+              "label": "Basert på generalisert tolkning av objekter med små innbyrdes variasjoner (f.eks. skille mellom tynt humusdekke og bart fjell, eller mellom to svært like bergarter)"
+            },
+            {
+              "value": "Overgangsmessig grense",
+              "label": "Glidende overgang mellom to bergarter,  jordarter o.l."
+            },
+            {
+              "value": "Tolket avgrensning/registrering",
+              "label": "Avgrensninger av geologisk objekt eller delobjekt fremkommet ved generalisering, samtolkning eller aggregering"
+            },
+            {
+              "value": "Flyfototolket objekt eller delobjekt",
+              "label": "Flyfototolket objekt eller delobjekt"
+            },
+            {
+              "value": "Observasjon med usikker geografisk beliggenhet",
+              "label": "Observasjon med usikker geografisk beliggenhet"
+            },
+            {
+              "value": "Avgrensning ikke basert på geologi",
+              "label": "Der f.eks. en administrativ grense eller kystkontur har bidratt til avgrensning av et geologisk objekt"
+            },
+            {
+              "value": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser"
+            },
+            {
+              "value": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking"
+            },
+            {
+              "value": "Avgrensning basert på seismikk",
+              "label": "Avgrensning basert på seismikk"
+            },
+            {
+              "value": "Avgrensning basert på detaljerte dybdedata",
+              "label": "Avgrensning ved bruk av multistråleekkolodd eller interferometrisk sonar"
+            },
+            {
+              "value": "Avgrensning basert på backscatter data/sidescan.sonar",
+              "label": "Avgrensning basert på bunnreflektivitet/data fra sidescan.sonar"
+            },
+            {
+              "value": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder"
+            },
+            {
+              "value": "Avgrensning basert på flere metoder/datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper"
+            },
+            {
+              "value": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video"
+            },
+            {
+              "value": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l."
+            },
+            {
+              "value": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart",
+              "label": "Avgrensningen er foretatt ut fra tolkning basert på tilgjengelige batymetriske data (varierende oppløsning), litteratur og kart"
+            },
+            {
+              "value": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon",
+              "label": "Avgrensning basert på Lidardata, flyfoto og/eller multi-/hyperspektrale bilder og eksisterende geologisk informasjon"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata"
+            },
+            {
+              "value": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold",
+              "label": "Avgrensning basert på romlig modellering med utgangspunkt i detaljerte dybdedata, prøvetaking samt fysiske datasett som strøm, bølger, eksponering og lysforhold"
+            }
+          ],
+          "definition": "hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "FellesegenskaperLandform"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Geotopvurdering",
+    "description": "Geotop vurdering knyttet til LandformFlate",
+    "attributes": [
+      {
+        "name": "geotopverdi",
+        "type": "Geotopverdi",
+        "description": "Geotopverdi blir regnet ut fra matrise basert på kvalitet og rødlistakategori (ubetydelig verdi, svært stor verdi)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "4 Svært stor verdi",
+              "label": "Svært stor verdi"
+            },
+            {
+              "value": "3 Stor verdi",
+              "label": "Stor verdi"
+            },
+            {
+              "value": "2 Middles verdi",
+              "label": "Middels verdi"
+            },
+            {
+              "value": "1 Noe verdi",
+              "label": "Noe verdi"
+            },
+            {
+              "value": "0 Ubetydelig verdi",
+              "label": "Ubetydelig verdi"
+            },
+            {
+              "value": "99 Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Geotopverdi blir regnet ut fra matrise basert på lokalitetskvalitet og rødlistakategori",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "tilstand",
+        "type": "Tilstand",
+        "description": "Samlet vurdering av den økologiske tilstanden til en lokalitet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "0 Sterk forringet",
+              "label": "Sterkt forringet"
+            },
+            {
+              "value": "1 Forringet",
+              "label": "Forringet"
+            },
+            {
+              "value": "2 Noe forringet",
+              "label": "Noe forringet"
+            },
+            {
+              "value": "3 Ingen/ubetydelig forringet",
+              "label": "Ingen/ubetydelig forringet"
+            },
+            {
+              "value": "99 Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Samlet vurdering av den økologiske tilstanden til en lokalitet",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "utforming",
+        "type": "Utforming",
+        "description": "Utforming av geotop",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3 Meget tydelig",
+              "label": "Meget tydelig"
+            },
+            {
+              "value": "2 Tydelig",
+              "label": "Tydelig"
+            },
+            {
+              "value": "1 Middels tydelig",
+              "label": "Middels tydelig"
+            },
+            {
+              "value": "0 Diffus",
+              "label": "Diffus"
+            },
+            {
+              "value": "99 Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Utforming av lokalitet/geotop",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "rødlistekategori",
+        "type": "Rødlistekategori",
+        "description": "IUCN rødlista kategori (NT, VU, osv.), internasjonal rødliste",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "CO Gått tapt",
+              "label": "CO - Gått tapt"
+            },
+            {
+              "value": "CR Kritisk truet",
+              "label": "CR - Kritisk truet"
+            },
+            {
+              "value": "EN Sterkt truet",
+              "label": "EN - Sterkt truet"
+            },
+            {
+              "value": "VU Sårbar",
+              "label": "VU - Sårbar"
+            },
+            {
+              "value": "NT Nær truet",
+              "label": "NT - Nær truet"
+            },
+            {
+              "value": "DD Datamangel",
+              "label": "DD - Datamangel"
+            },
+            {
+              "value": "LC Intakt",
+              "label": "LC - Intakt"
+            },
+            {
+              "value": "NE Ikke vurdert",
+              "label": "NE - Ikke vurdert"
+            }
+          ],
+          "definition": "IUCN rødlista kategori (NT, VU, osv.), internasjonal rødliste",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "trinn_TP1",
+        "type": "Trinn_TP",
+        "description": "Kode tilstand trinn 1. Se kartleggingsinstruks.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Trinn 3",
+              "label": "Trinn 3"
+            },
+            {
+              "value": "Trinn 2",
+              "label": "Trinn 2"
+            },
+            {
+              "value": "Trinn 1",
+              "label": "Trinn 1"
+            },
+            {
+              "value": "Trinn 0",
+              "label": "Trinn 0"
+            },
+            {
+              "value": "Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Kode tilstand primær trinn 1 og primær trinn 2.",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "trinn_TP2",
+        "type": "Trinn_TP",
+        "description": "Kode tilstand trinn 2. Se kartleggingsinstruks.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Trinn 3",
+              "label": "Trinn 3"
+            },
+            {
+              "value": "Trinn 2",
+              "label": "Trinn 2"
+            },
+            {
+              "value": "Trinn 1",
+              "label": "Trinn 1"
+            },
+            {
+              "value": "Trinn 0",
+              "label": "Trinn 0"
+            },
+            {
+              "value": "Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Kode tilstand primær trinn 1 og primær trinn 2.",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "trinn_TS",
+        "type": "Trinn_TS",
+        "description": "Kode tilstand sekundær. Se kartleggingsinstruks.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Trinn 5",
+              "label": "Trinn 5"
+            },
+            {
+              "value": "Trinn 4",
+              "label": "Trinn 4"
+            },
+            {
+              "value": "Trinn 3",
+              "label": "Trinn 3"
+            },
+            {
+              "value": "Trinn 2",
+              "label": "Trinn 2"
+            },
+            {
+              "value": "Trinn 1",
+              "label": "Trinn 1"
+            },
+            {
+              "value": "Trinn 0",
+              "label": "Trinn 0"
+            },
+            {
+              "value": "Ikke vurdert",
+              "label": "Ikke vurdert"
+            },
+            {
+              "value": "Trinn 6",
+              "label": "Trinn 6"
+            }
+          ],
+          "definition": "Kode tilstand sekundær",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "merknad",
+        "type": "CharacterString",
+        "description": "Tekstlig beskrivelse på hva som påvirker tilstanden",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "utvalgskriterium",
+        "type": "CharacterString",
+        "description": "Grunnlaget for at en geotop blir kartlagt (faktor = geologisk arv, internasjonal standard)",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "lokalitetskvalitet",
+        "type": "Lokalitetskvalitet",
+        "description": "Kvalitet av geotop (regnet ut fra utforming og tilstand)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3 Høy",
+              "label": "Høy"
+            },
+            {
+              "value": "2 Middels",
+              "label": "Middels"
+            },
+            {
+              "value": "1 Lav",
+              "label": "Lav"
+            },
+            {
+              "value": "0 Ubetydelig",
+              "label": "Ubetydelig"
+            },
+            {
+              "value": "99 Ikke vurdert",
+              "label": "Ikke vurdert"
+            }
+          ],
+          "definition": "Kvalitet av lokalitet/geotop (regnet ut fra utforming og tilstand)",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "vurderingsdato",
+        "type": "DateTime",
+        "description": "Når vurderingen ble foretatt",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [],
+      "associations": [
+        {
+          "target": "LandformFlate",
+          "role": "LandformFlate",
+          "cardinality": "1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Dekningsområde",
+    "description": "Dekningsområde for landform",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "Flate",
+        "description": "objektets utstrekning",
+        "cardinality": "1"
+      },
+      {
+        "name": "NiN_Landform",
+        "type": "NiN_Landform",
+        "description": "NiN kode landformenhet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "3AB-DG Dødisgrop",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AB_DG</u></font></a> Forsenkning dannet ved nedsmelting av stor isklump begravd i løsmasser"
+            },
+            {
+              "value": "3AR-DE Delta",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3AR_DE</u></font></a> Avsetning av elvetransportert materiale omkring elvemunning i stillestående vann"
+            },
+            {
+              "value": "3ER-RL Leirravine",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_RL</u></font></a> Liten, skarpt nedskåret V-dal, ofte med bratt lengdeprofil, gravd ut av rennende vann i marint leirsediment"
+            },
+            {
+              "value": "3ER-JP Jordpyramide",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ER_JP</u></font></a> Søyleform i hardpakket morene"
+            },
+            {
+              "value": "3ML-LS Leirskred(grop)",
+              "label": "<a href=\"http://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS\"><font color=\"#467886\"><u>https://adb-prod-ninkapi-as.azurewebsites.net/v2.3/variasjon/hentkode/3ML_LS</u></font></a> Grop etter kvikk-leirskred (leirfall)"
+            }
+          ],
+          "definition": "NiN kode landformenhet",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "NiN_Versjon",
+        "type": "NiN_Versjon",
+        "description": "NiN versjon",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "2.3",
+              "label": "NiN versjon 2.3"
+            },
+            {
+              "value": "3.0",
+              "label": "NiN versjon 3.0"
+            }
+          ],
+          "definition": "NiN versjon",
+          "asDictionary": "false"
+        }
+      },
+      {
+        "name": "kartleggingsinstruks",
+        "type": "URI",
+        "description": "lenke til kartleggingsinstruks",
+        "cardinality": "1"
+      },
+      {
+        "name": "prosjektRapport",
+        "type": "URI",
+        "description": "lenke til datarapport",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kartleggingsår",
+        "type": "Integer",
+        "description": "kartleggingsår",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kartlagtOmråde",
+        "type": "CharacterString",
+        "description": "Hvilket område som er kartlagt; fylke, kommune osv.",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "FellesegenskaperDekningsområde"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "FellesegenskaperDekningsområde",
+    "description": "abstrakt objekttype som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper\n\nMerknad:\nSpesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.",
+    "attributes": [
+      {
+        "name": "identifikasjon",
+        "type": "Identifikasjon",
+        "description": "unik identifikasjon av et objekt",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "lokalId",
+            "type": "CharacterString",
+            "description": "lokal identifikator av et objekt\n\nMerknad: Det er dataleverendørens ansvar å sørge for at den lokale identifikatoren er unik innenfor navnerommet.",
+            "cardinality": "1"
+          },
+          {
+            "name": "navnerom",
+            "type": "CharacterString",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt, anbefales å være en http-URI\n\nEksempel: http://data.geonorge.no/SentraltStedsnavnsregister/1.0\n\nMerknad : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og må være registrert i data.geonorge.no eller data.norge.no",
+            "cardinality": "1"
+          },
+          {
+            "name": "versjonId",
+            "type": "CharacterString",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "datauttaksdato",
+        "type": "DateTime",
+        "description": "dato for uttak fra en database\n\nMerknad:\nSkiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "opphav",
+        "type": "CharacterString",
+        "description": "referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\n\nMerknad:\nKan også beskrive navn på person og årsak til oppdatering",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "geodataprodusent",
+        "type": "CharacterString",
+        "description": "organisasjon som har produsert datasettet/tjenesten",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  }
+]

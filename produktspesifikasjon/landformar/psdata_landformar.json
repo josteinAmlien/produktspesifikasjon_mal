@@ -1,0 +1,234 @@
+{
+  "title": "Landformer",
+  "date": {
+    "creation": "2025-11-26",
+    "revision": "2026-03-03"
+  },
+  "language": "nor",
+  "contact": {
+    "organizationName": "Norges geologiske undersøkelse",
+    "logo": "https://register.geonorge.no/data/organizations/970188290_NGU_liten.png",
+    "electronicMailAddress": "max.holthuis@ngu.no",
+    "role": "owner"
+  },
+  "identificationSection": {
+    "title": "Landformer",
+    "abstract": "Datasettet viser landformer, geotopverdi og dekning. Data for landformer består av linjer og polygoner. Kartlegging av ulike landformtyper er pågående, og dekningsgrad av ulike landformtyper varierer. Datasettet inneholder også landformer som er verdivurdert i henhold til geotopverdsettings-kriteriene, beskrevet i veilederen M-1941 Konsekvensutredninger for klima og miljø. Landformer er geologiske formasjoner i landskapet som er definert ut fra form og utseende, og ut fra hvilke prosesser som har dannet dem. Landformtypene er definert i i NiN (Natur i Norge). Et utvalg av rødlistede landformer har tidligere blitt kartlagt etter Miljødirektoratets instruks (Christoffersen mfl. 2021; van Boeckel mfl. 2023, 2024) og blitt publisert ved Miljødirektoratet under navnet “Landformer”. Datasettet viser ikke landformer i marint miljø.",
+    "purpose": {
+      "summary": "Et av de viktigste formålene med datasettet er å visualisere spredning av landformer og tilhørende verdi i konsekvensutredninger. Datasettet er utviklet med tanke på bruk i konsekvensutredninger og arealplaner. Datasettet kan også være nyttig i annen arealforvaltning der det er behov for å ha oversikt over utbredelsen av landformdannende prosesser.",
+      "useCase": {
+        "name": "Bruksområde",
+        "summary": "Et av de viktigste formålene med datasettet er å visualisere spredning av landformer og tilhørende verdi i konsekvensutredninger.\nDatasettet er utviklet med tanke på bruk i konsekvensutredninger og arealplaner. Datasettet kan også være nyttig i annen arealforvaltning der det er behov for å ha oversikt over utbredelsen av landformdannende prosesser. For eksempel kan utbredelse av leirraviner vise hvor ravinering finner sted; og utbredelse av leirskredgroper vise hvor skred, som kvikkleireskred, har forekommet i hav- og fjordavsetninger. Datasettet kan også brukes for temakart, analyser m.m."
+      }
+    },
+    "spatialRepresentationType": "Vektor",
+    "uniqueId": "7d220e23-5835-4f83-ba96-1156c154e566",
+    "restriction": {
+      "legalConstraints": {
+        "accessConstraints": "Åpne data",
+        "useConstraints": "Lisens",
+        "license": "Norsk lisens for offentlige data (NLOD)",
+        "licenseUrl": "http://data.norge.no/nlod/no/1.0"
+      }
+    },
+    "contact": [
+      {
+        "organizationName": "Norges geologiske undersøkelse",
+        "electronicMailAddress": "max.holthuis@ngu.no",
+        "role": "owner"
+      },
+      {
+        "organizationName": "Norges geologiske undersøkelse",
+        "electronicMailAddress": "metadataansvarlig@ngu.no",
+        "role": "pointOfContact"
+      },
+      {
+        "organizationName": "Norges geologiske undersøkelse",
+        "electronicMailAddress": "bo.nordahl@ngu.no",
+        "role": "publisher"
+      }
+    ],
+    "maintenance": "Etter behov",
+    "extent": {
+      "geographicElement": {
+        "westBoundLongitude": "2.0",
+        "eastBoundLongitude": "33.0",
+        "southBoundLatitude": "57.0",
+        "northBoundLatitude": "72.0"
+      },
+      "temporalElement": {
+        "timePeriod": {
+          "beginPosition": "2025-11-26",
+          "endPosition": "2026-03-03"
+        }
+      }
+    },
+    "date": {
+      "creation": "2025-11-26",
+      "publication": "2025-11-26",
+      "revision": "2026-03-03"
+    },
+    "language": "nor"
+  },
+  "scopeSection": [
+    {
+      "specificationScope": {
+        "scopeIdentification": "hele datasettet",
+        "level": "dataset",
+        "extent": {
+          "description": "National"
+        }
+      }
+    }
+  ],
+  "dataContentAndStructureSection": {
+    "narrativeDescription": "Et av de viktigste formålene med datasettet er å visualisere spredning av landformer og tilhørende verdi i konsekvensutredninger.\nDatasettet er utviklet med tanke på bruk i konsekvensutredninger og arealplaner. Datasettet kan også være nyttig i annen arealforvaltning der det er behov for å ha oversikt over utbredelsen av landformdannende prosesser. For eksempel kan utbredelse av leirraviner vise hvor ravinering finner sted; og utbredelse av leirskredgroper vise hvor skred, som kvikkleireskred, har forekommet i hav- og fjordavsetninger. Datasettet kan også brukes for temakart, analyser m.m."
+  },
+  "referenceSystemSection": {
+    "spatialReferenceSystem": [
+      {
+        "code": "EPSG:25833",
+        "name": "EUREF89 UTM sone 33, 2d"
+      },
+      {
+        "code": "EPSG:4258",
+        "name": "EUREF 89 Geografisk (ETRS 89) 2d"
+      },
+      {
+        "code": "EPSG:25833",
+        "name": "EUREF89 UTM sone 33, 2d"
+      }
+    ]
+  },
+  "dataQualitySection": {
+    "scope": {
+      "level": "dataset"
+    },
+    "report": [
+      {
+        "nameOfMeasure": "SOSI produktspesifikasjon: Landformer",
+        "measureDescription": "Dataene er ikke vurdert iht produktspesifikasjonen",
+        "descriptiveResult": "Dataene er ikke vurdert iht produktspesifikasjonen"
+      }
+    ]
+  },
+  "maintenanceSection": {
+    "maintenanceAndUpdateFrequency": "Etter behov"
+  },
+  "portrayal": {
+    "name": "Tegneregler",
+    "linkage": "https://register.geonorge.no/tegneregler/landformer"
+  },
+  "deliverySection": [
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "Geonorge nedlastning",
+          "deliveryService": {
+            "serviceEndpoint": "https://nedlasting.ngu.no/api/capabilities/",
+            "serviceProperty": {
+              "type": "Geonorge nedlastning",
+              "value": "GEONORGE:DOWNLOAD"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "FGDB"
+          },
+          {
+            "formatName": "GeoPackage"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "https://nedlasting.ngu.no/api/atom/7d220e23-5835-4f83-ba96-1156c154e566",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "FGDB"
+          },
+          {
+            "formatName": "GeoPackage"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "Landformer WMS",
+          "deliveryService": {
+            "serviceEndpoint": "https://geo.ngu.no/mapserver/LandformerWMS?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0",
+            "serviceProperty": {
+              "type": "Landformer WMS",
+              "value": "WMS-tjeneste"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "OGC-WMS"
+          }
+        ],
+        "deliveryScope": "Tjeneste"
+      }
+    }
+  ],
+  "metadataSection": {
+    "metadataStandard": "ISO19115",
+    "metadataStandardVersion": "2003",
+    "metadataDate": "2026-03-09",
+    "language": "nor",
+    "contact": {
+      "organizationName": "Norges geologiske undersøkelse",
+      "logo": "https://register.geonorge.no/data/organizations/970188290_NGU_liten.png",
+      "electronicMailAddress": "metadataansvarlig@ngu.no",
+      "role": "pointOfContact"
+    },
+    "metadataIdentifier": {
+      "authority": "Geonorge",
+      "code": "7d220e23-5835-4f83-ba96-1156c154e566",
+      "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
+      "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/7d220e23-5835-4f83-ba96-1156c154e566"
+    },
+    "links": [
+      {
+        "href": "https://www.geonorge.no/geonetwork/srv/nor/csw?service=CSW&request=GetRecordById&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full&id=7d220e23-5835-4f83-ba96-1156c154e566",
+        "rel": "describedby",
+        "type": "application/xml",
+        "title": "Metadata (ISO 19139)"
+      },
+      {
+        "href": "https://nedlasting.ngu.no/api/capabilities/",
+        "rel": "enclosure",
+        "type": "text/html",
+        "title": "Nedlasting"
+      },
+      {
+        "href": "#!?zoom=3&lon=306722&lat=7197864&wms=https://geo.ngu.no/mapserver/LandformerWMS",
+        "rel": "service",
+        "type": "text/html",
+        "title": "Tjeneste"
+      },
+      {
+        "href": "https://geo.ngu.no/mapserver/LandformerWMS?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0",
+        "rel": "service",
+        "type": "application/xml",
+        "title": "Tjeneste-distribusjon"
+      }
+    ]
+  }
+}
