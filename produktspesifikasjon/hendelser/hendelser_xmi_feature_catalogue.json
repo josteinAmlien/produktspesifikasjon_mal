@@ -1,0 +1,1990 @@
+[
+  {
+    "name": "Felles",
+    "description": "Overordnet informasjon.",
+    "attributes": [
+      {
+        "name": "identifikasjon",
+        "type": "uuid",
+        "description": "Unik ID.",
+        "cardinality": "1"
+      },
+      {
+        "name": "betegnelse",
+        "type": "CharacterString",
+        "description": "Navn eller beskrivelse av hendelsen.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "førsteRegistreringstidspunkt",
+        "type": "DateTime",
+        "description": "Dato og tid for førstegangs-registrering av hendelsen.",
+        "cardinality": "1"
+      },
+      {
+        "name": "oppdateringstidspunkt",
+        "type": "DateTime",
+        "description": "Dato og tid for siste oppdatering.",
+        "cardinality": "1"
+      },
+      {
+        "name": "geometriobjekt",
+        "type": "URI",
+        "description": "referanse til en eksisterende geometri som stedefester dette objektet",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  },
+  {
+    "name": "ops",
+    "description": "",
+    "attributes": [],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [],
+      "associations": [
+        {
+          "target": "Hendelse",
+          "role": "hendelse",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Ressurs",
+          "role": "potesiellResserus",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Helsesamvirke",
+    "description": "Hendelsestype som ikke inngår i de forhåndsdefinerte hendelsestypene.",
+    "attributes": [
+      {
+        "name": "samvirkeType",
+        "type": "TypeHelsesamvirke",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "firstResponder",
+              "label": "firstResponder"
+            },
+            {
+              "value": "tvang",
+              "label": "tvang"
+            }
+          ],
+          "definition": "Kategorier av hendelsestypen helsesamvikre"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Hendelse",
+    "description": "Forekomst eller endring i et bestemt sett med omstendigheter (NS-EN ISO 22300: 2021; NS-ISO 31000: 2018) og som nødetatene ser behov for å informere om.",
+    "attributes": [
+      {
+        "name": "punkt",
+        "type": "Punkt",
+        "description": "Geografisk lokasjon for hendelsen.",
+        "cardinality": "1"
+      },
+      {
+        "name": "opphavsaktør",
+        "type": "Hovedaktør",
+        "description": "Den enhet som registrerer eller rapporterer en hendelse, begrenset til politi, brann, helse eller HRS.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "politi",
+              "label": "Politi"
+            },
+            {
+              "value": "helse",
+              "label": "Helse"
+            },
+            {
+              "value": "brann",
+              "label": "Brann"
+            },
+            {
+              "value": "HRS",
+              "label": "HRS"
+            }
+          ],
+          "definition": "enhet som bidrar i å håndtere en hendelse, begrenset til politi, brann, helse eller HRS."
+        }
+      },
+      {
+        "name": "innmelder",
+        "type": "Observatør",
+        "description": "Person eller sensor som varsler om en hendelse til nødetatene.",
+        "cardinality": "1..*",
+        "attributes": [
+          {
+            "name": "kontaktinformasjon",
+            "type": "CharacterStreng",
+            "description": "Kontaktinformasjon",
+            "cardinality": "1"
+          },
+          {
+            "name": "OPSoperatør",
+            "type": "Boolean",
+            "description": "Angir om operatøren er tilknyttet OPS.",
+            "cardinality": "1"
+          },
+          {
+            "name": "sensor",
+            "type": "Boolean",
+            "description": "om observasjonen er gjort fra en automatisk sensor.",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "Kort beskrivelse som fritekst.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "prioritet",
+        "type": "PrioritetHendelse",
+        "description": "hvor høyt en hendelse prioriteres med hensyn til alvorlighet og hastegrad\nMerknad: Avledes fra alle aktørenes vurdering av prioritet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "høy",
+              "label": "Hendelse som krever umiddelbar respons (akutt)"
+            },
+            {
+              "value": "middels",
+              "label": "Hendelse som krever rask respons"
+            },
+            {
+              "value": "lav",
+              "label": "Hendelse som krever respons"
+            },
+            {
+              "value": "ingen",
+              "label": "ingenPrioritet"
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Prioritet ikke vurdert"
+            }
+          ],
+          "definition": "Hendelse som krever umiddelbar respons (akutt)"
+        }
+      },
+      {
+        "name": "kompleksitet",
+        "type": "Kompleksitet",
+        "description": "hvor krevende/komplisert det er å håndtere en hendelse\nMerknad: Avledes fra alle aktørenes vurdering av kompleksitet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "komplisert",
+              "label": "Hendelser som er særlig utfordrende å håndtere, eksempelvis på grunn av sitt omfang, krav til spesialisert kompetanse, tilgjengelighet til hendelsessted og/eller krav til koordinering mellom nødetatene."
+            },
+            {
+              "value": "rutine",
+              "label": "Hendelser som ikke defineres som komplekse"
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Hendelsens kompleksitet ikke vurdert"
+            }
+          ],
+          "definition": "Et uttrykk for hvor krevende/komplisert det er å håndtere en hendelse"
+        }
+      },
+      {
+        "name": "aktørPerspektiv",
+        "type": "AktørPerspektiv",
+        "description": "Hendelsens prioritet og kompleksitet for en aktør.",
+        "cardinality": "1..*",
+        "attributes": [
+          {
+            "name": "aktør",
+            "type": "Hovedaktør",
+            "description": "enhet som bidrar i å håndtere en hendelse, begrenset til politi, brann, helse eller HRS.",
+            "cardinality": "1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "politi",
+                  "label": "Politi"
+                },
+                {
+                  "value": "helse",
+                  "label": "Helse"
+                },
+                {
+                  "value": "brann",
+                  "label": "Brann"
+                },
+                {
+                  "value": "HRS",
+                  "label": "HRS"
+                }
+              ],
+              "definition": "enhet som bidrar i å håndtere en hendelse, begrenset til politi, brann, helse eller HRS."
+            }
+          },
+          {
+            "name": "prioritet",
+            "type": "PrioritetHendelse",
+            "description": "Et uttrykk for hvor høyt en hendelse prioriteres med hensyn til alvorlighet og hastegrad.",
+            "cardinality": "1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "høy",
+                  "label": "Hendelse som krever umiddelbar respons (akutt)"
+                },
+                {
+                  "value": "middels",
+                  "label": "Hendelse som krever rask respons"
+                },
+                {
+                  "value": "lav",
+                  "label": "Hendelse som krever respons"
+                },
+                {
+                  "value": "ingen",
+                  "label": "ingenPrioritet"
+                },
+                {
+                  "value": "ikkeSatt",
+                  "label": "Prioritet ikke vurdert"
+                }
+              ],
+              "definition": "Hendelse som krever umiddelbar respons (akutt)"
+            }
+          },
+          {
+            "name": "kompleksitet",
+            "type": "Kompleksitet",
+            "description": "Et uttrykk for hvor komplisert det er å håndtere en hendelse.",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "komplisert",
+                  "label": "Hendelser som er særlig utfordrende å håndtere, eksempelvis på grunn av sitt omfang, krav til spesialisert kompetanse, tilgjengelighet til hendelsessted og/eller krav til koordinering mellom nødetatene."
+                },
+                {
+                  "value": "rutine",
+                  "label": "Hendelser som ikke defineres som komplekse"
+                },
+                {
+                  "value": "ikkeSatt",
+                  "label": "Hendelsens kompleksitet ikke vurdert"
+                }
+              ],
+              "definition": "Et uttrykk for hvor krevende/komplisert det er å håndtere en hendelse"
+            }
+          }
+        ]
+      },
+      {
+        "name": "lokalitetstype",
+        "type": "Lokalitetstype",
+        "description": "Beskrivelse av omgivelsene der en hendelse finner sted.",
+        "cardinality": "1",
+        "valueDomain": {
+          "definition": "Kjennetegn ved det stedet der hendelsen finner sted og som kan ha betydning for håndteringen. En gitt lokalitetstype kan inngå i en strukturert kategorisering av kjennetegn knyttet til blant annet naturforhold (som skog, sjø, fjell mv.), bebyggelse, befolkningstetthet og tilgjengelighet."
+        }
+      },
+      {
+        "name": "øvelse",
+        "type": "Boolean",
+        "description": "Angir om hendelsen er en øvelse.\nMerknad: Dersom egenskapen ikke angis, skal hendelsen betraktes som reell",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": [
+        {
+          "target": "ops",
+          "role": "ops",
+          "cardinality": "1"
+        },
+        {
+          "target": "Utbredelse",
+          "role": "framskriving",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Objekt",
+          "role": "objekt",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Utbredelse",
+          "role": "utbredelse",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Tiltakslokasjon",
+          "role": "tiltakslokasjon",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "SammensattHendelse",
+          "role": "sammensattHendlelse",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "Ressurs",
+          "role": "tilordnetRessurs",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Kontekst",
+          "role": "kontekst",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "Observatør",
+          "role": "innmelder",
+          "cardinality": "1..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "PlanlagtHendelse",
+    "description": "Hendelse som nødetatene er kjent med og som i kraft av sitt omfang krever særskilte forberedelser.",
+    "attributes": [
+      {
+        "name": "planlagtHendelsesType",
+        "type": "TypePlanlagtHendelse",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "arrangement",
+              "label": "Planlagte arrangementer, f. eks idrett, kultur, konserter, festivaler ol."
+            },
+            {
+              "value": "demonstrasjon",
+              "label": "Planlagte demonstrasjoner."
+            },
+            {
+              "value": "VIP",
+              "label": "Planlagte hendelser som krever særskilt beskyttelse av deltakere i hendelsen, eksempelvis grunnet deres offisielle status som myndighetspersoner."
+            },
+            {
+              "value": "annenPlanlagtHendelse",
+              "label": "Planlagt hendelse som ikke inngår i de forhåndsdefinerte kategoriene for slike hendelser."
+            }
+          ],
+          "definition": "Kategorier av hendelsestypen planlagt hendelse."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Utbredelse",
+    "description": "Geografisk utbredelse av hendelsen.",
+    "attributes": [
+      {
+        "name": "flate",
+        "type": "Flate",
+        "description": "Geometri som avgrenser hendelsen dersom hendelsen kan defineres som en flate (eks. skogbrannområder og flomområder).",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kurve",
+        "type": "Kurve",
+        "description": "Geometri som avgrenser hendelsen dersom hendelsen kan defineres som en kurve (eks. brannfront).",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "utbredelsestype",
+        "type": "TypeUtbredelse",
+        "description": "Spredningsbeskrivelser for et utvalg av hendelser som har begreper for utbredelse.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "hendelsesområde",
+              "label": "En generisk betegnelse for ustrekning av en hendelse som kan brukes dersom hendelsen ikke har begreper for områder som er rammet."
+            },
+            {
+              "value": "brannfront",
+              "label": "Den fremste delen av en brann hvor forbrenningen er mest intens og hvordan brannen sprer seg videre (retning, hastighet, tid, prognose, etc.)."
+            },
+            {
+              "value": "aktivtBrannområde",
+              "label": "Området som er rammet av brannen, hvor det pågår aktiv brann."
+            },
+            {
+              "value": "brentOmråde",
+              "label": "Området som er rammet av brannen, som er brent."
+            },
+            {
+              "value": "skredområde",
+              "label": "Området som er rammet av skredet."
+            },
+            {
+              "value": "flomområde",
+              "label": "Området som er rammet av flommen."
+            }
+          ],
+          "definition": "Spredningsbeskrivelser for et utvalg av hendelser som har begreper for utbredelse."
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "Kort beskrivelse som fritekst.",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "SammensattHendelse",
+    "description": "Sammenstilling av flere hendelser (f. eks. ekstremvær med mye nedbør i et helt vassdrag, hvor det oppstår hendelser i et helt dalføre).",
+    "attributes": [],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": [
+        {
+          "target": "Hendelse",
+          "role": "hendelse",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "AnnenHendelse",
+    "description": "Hendelsestype som ikke inngår i de forhåndsdefinerte hendelsestypene.",
+    "attributes": [],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Sikkerhetshendelse",
+    "description": "Hendelser som er utløst av helt eller delvis villede handlinger og som medfører fare for omgivelsene, inkludert for nødetater. Hendelsestypen inkluderer ulovlige og straffbare handlinger.",
+    "attributes": [
+      {
+        "name": "sikkerhetshendelseType",
+        "type": "TypeSikkerhetshendelse",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "vold",
+              "label": "En hendelse der fysisk makt, trusler eller overgrep utøves mot en eller flere personer, med potensial for skade på liv og helse."
+            },
+            {
+              "value": "orden",
+              "label": "En hendelse som krever tiltak for å gjenopprette eller opprettholde offentlig ro og sikkerhet, ofte relatert til forstyrrelser, uro eller situasjoner som kan eskalere til vold eller skade."
+            },
+            {
+              "value": "PLIVO",
+              "label": "En pågående situasjon der en eller flere gjerningspersoner utøver, eller er i ferd med å utøve, livstruende vold mot flere uskyldige personer. Skadeomfanget er, eller vurderes å kunne bli, så stort at nødetatene raskest mulig må gå i ekstraordinær innsats sammen, for å stanse handlingene og redde liv (Nasjonal prosedyre – PLIVO)."
+            },
+            {
+              "value": "terror",
+              "label": "Terrorhandling: Ulovlig bruk av, eller trussel om bruk av, makt eller vold mot personer eller eiendom, i et forsøk på å legge press på landets myndigheter eller befolkning eller samfunnet for øvrig for å oppnå politiske, religiøse eller ideologiske mål (NOU 2016: 19 Samhandling for sikkerhet)."
+            },
+            {
+              "value": "sabotasje",
+              "label": "Sabotasje er å skade eiendom, produksjonsmidler eller tekniske systemer med hensikt (SNL)."
+            },
+            {
+              "value": "bombetrussel",
+              "label": "En hendelse der det blir fremsatt en påstand eller mistanke om at en eksplosiv enhet er plassert, noe som utløser behov for evakuering, søk og vurdering av risiko."
+            },
+            {
+              "value": "helserelatertSikkerhetssituasjon",
+              "label": "Hendelser som involverer personer som kan utgjøre en fare for seg selv eller andre, eksempelvis knyttet til rus eller psykisk tilstand."
+            },
+            {
+              "value": "annenSikkerhetshendelse",
+              "label": "Sikkerhetshendelse som ikke inngår i de forhåndsdefinerte typene."
+            }
+          ],
+          "definition": "Kategorier av hendelsestypen sikkerhetshendelse."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Naturhendelse",
+    "description": "Hendelse som er forårsaket av naturforhold",
+    "attributes": [
+      {
+        "name": "naturhendelseType",
+        "type": "TypeNaturhendelse",
+        "description": "Kategorier av hendelsestypen naturhendelse.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "skred",
+              "label": "Masse (stein, løsmasser, leire, jord) som beveger seg nedover skråninger og/eller under vann (delvis basert på NVE m fl)."
+            },
+            {
+              "value": "snøskred",
+              "label": "Masse (snø, våt eller tørr) som beveger seg raskt nedover en skråning (NVE m fl)."
+            },
+            {
+              "value": "flom",
+              "label": "Vannføring som går ut over normale nivåer og som fører eller kan føre til skade på infrastruktur og/eller bebyggelse."
+            },
+            {
+              "value": "skogGressMarkbrann",
+              "label": "En brann som oppstår i vegetasjonsområder i innmark og utmark."
+            },
+            {
+              "value": "ekstremvær",
+              "label": "Vær som medfører fare for liv og verdier. Ekstremvær kan være sterk vind, kraftig nedbør, stormflo og høye bølger eller en kombinasjon av værelementer som til sammen utgjør en fare."
+            },
+            {
+              "value": "annenNaturhendelse",
+              "label": "Naturhendelse som ikke inngår i forhåndsdefinerte naturhendelsestyper."
+            }
+          ],
+          "definition": "Kategorier av hendelsestypen naturhendelse."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Ulykke",
+    "description": "En ikke villet hendelse som forårsaker skade.",
+    "attributes": [
+      {
+        "name": "ulykkeType",
+        "type": "TypeUlykke",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "trafikkulykke",
+              "label": "Ulykker som skjer på veiene i forbindelse med forflytting av mennesker og gods. Det kan være møteulykker, utforkjøringer og skader på fotgjengere og syklister (SNL)."
+            },
+            {
+              "value": "jernbaneulykke",
+              "label": "En uønsket eller utilsiktet plutselig begivenhet eller en bestemt rekke slike begivenheter som har skadelige følger, herunder som medfører at noen dør eller blir alvorlig skadet, som medfører betydelig skade på jernbanemateriell, på kjørevei, på eiendom utenfor jernbanen eller på miljø, og alle andre lignende ulykker (Jernbaneundersøkelsesloven § 5)."
+            },
+            {
+              "value": "tunnelulykkeVei",
+              "label": "Veiulykke i tunnel."
+            },
+            {
+              "value": "tunnelulykkeJernbane",
+              "label": "Jernbaneulykke i tunnel (se jernbaneulykke)."
+            },
+            {
+              "value": "tunnelbrannVei",
+              "label": "Brann i veitunnel."
+            },
+            {
+              "value": "tunnelbrannJernbane",
+              "label": "Brann i jernbanetunnel."
+            },
+            {
+              "value": "bygningsulykke",
+              "label": "En ulykke som involverer skade eller sammenbrudd av en bygning, inkludert sammenraste konstruksjoner som stillas og broer."
+            },
+            {
+              "value": "brann",
+              "label": "Alle branner utenom skog-/gress-/markbrann."
+            },
+            {
+              "value": "brannABA",
+              "label": "Automatisk brannalarm (ABA). Alarm fra bygg med direkte tilknytning til 110 sentralen."
+            },
+            {
+              "value": "CBRNE",
+              "label": "Fellesbetegnelse på hendelser som omfatter kjemiske stoffer (C), biologiske agens (B), radioaktive stoffer (R), nukleært materiale (N) og eksplosiver (E) med høyt farepotensiale.)."
+            },
+            {
+              "value": "personskade",
+              "label": "Ulykker med personskade som ikke knyttes direkte til annen hendelsestype Merknad: personskade i forbindelse med annen definert hendelsestype skal angis som eget personobjekt i denne hendelsen. (F.eks. skadet personobjekt knyttet til skred, trafikkulykke eller brann)."
+            },
+            {
+              "value": "savnetPerson",
+              "label": "En situasjon der en person ikke kan lokaliseres og antas å være i fare eller trenger assistanse."
+            },
+            {
+              "value": "personIFare",
+              "label": "Hendelser der personer er i fare uten at det nødvendigvis har oppstått skade. Inkluderer isolerte personer/grupper."
+            },
+            {
+              "value": "sjøhendelse",
+              "label": "Hendelse i sjø (vann, hav, mv.), slik som kollisjon mellom fartøy og fartøy i nød. Inkluderer \"sjøhendelse\" som definert i planverket for redningstjenesten."
+            },
+            {
+              "value": "personIVann",
+              "label": "Situasjon der en person i vann er i fare, inkludert person/mann over bord"
+            },
+            {
+              "value": "dykkerulykke",
+              "label": "En ulykke som oppstår under dykking, inkludert trykkrelaterte skader, utstyrsfeil, eller andre hendelser som setter dykkerens liv og helse i fare."
+            },
+            {
+              "value": "lufthendelse",
+              "label": "En hendelse relatert til luftfart, inkludert ulykker med luftfartøy, nødsituasjoner i luften, eller fare for objekter på bakken. Inkluderer \"lufthendelse\" som definert i planverket for redningstjenesten."
+            },
+            {
+              "value": "annenUlykke",
+              "label": "Ulykke som ikke inngår i forhåndsdefinerte ulykkeskategorier."
+            }
+          ],
+          "definition": "Kategorier av hendelsestypen ulykke."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelse"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Hendelsesrelatert",
+    "description": "Informasjon som er direkte knyttet til hendelsen, men som ikke indikerer hendelsestype (se angitte verdier).",
+    "attributes": [
+      {
+        "name": "kommentar",
+        "type": "CharacterString",
+        "description": "Kort beskrivelse som fritekst.",
+        "cardinality": "0..*"
+      },
+      {
+        "name": "registreringstidspunkt",
+        "type": "DateTime",
+        "description": "Dato og tid for registrering av hendelsesrelatert informasjon.",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Objekt",
+    "description": "Objekter på hendelsesstedet, samt observerte forhold ( objekter eller fenomenrer)  knyttet til hendelsen.",
+    "attributes": [
+      {
+        "name": "typeObjekt",
+        "type": "TypeObject",
+        "description": "Objekter fra kodelisten \"TypeObjekt\".",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "nødsignal",
+              "label": "Ethvert signal som brukes til å påkalle oppmerksomhet ifm nødssituasjon og ved andre omstendigheter hvor oppmerksomhet er krevet."
+            },
+            {
+              "value": "spor",
+              "label": "Klesplagg, mobil o.l. som kan knyttes til (er relevant for) et søk etter savnet person."
+            },
+            {
+              "value": "funn",
+              "label": "Funn av savnet person."
+            },
+            {
+              "value": "person",
+              "label": "Person (inkludert skadde på hendelsesstedet)."
+            },
+            {
+              "value": "last",
+              "label": "Eks. gods fra varebil eller jernbanevogn som er spredt utover hendelsesområdet ved en ulykke."
+            },
+            {
+              "value": "transportmiddel",
+              "label": "Transportmiddel som er observert i tilknyting til hendelsen."
+            },
+            {
+              "value": "bygg",
+              "label": "Bygg som er relevant for håndtering av hendelsen."
+            },
+            {
+              "value": "dyr",
+              "label": "Dyr"
+            },
+            {
+              "value": "annet",
+              "label": "Objekter som ikke inngår i de forhåndsdefinerte typene."
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Verdien er ikke lagt inn."
+            }
+          ],
+          "definition": "Angir hva som er observert."
+        }
+      },
+      {
+        "name": "posisjon",
+        "type": "GM_Object",
+        "description": "Dette er posisjonen til objektet. Dersom det er flere observasjoner kan også posisjonen estimeres basert på disse observasjonene. Det kan også være at enkelte observasjoner har større troverdighet enn andre og dermed bør vektes mer.",
+        "cardinality": "1"
+      },
+      {
+        "name": "posisjonskvalitet",
+        "type": "Posisjonskvalitet",
+        "description": "Beskriver usikkerhet knyttet til posisjonen. Det kan være en eksakt posisjon, men det kan også være knyttet usikkerhet til hvor objektet er innenfor et større eller mindre område. Dette angis med et valgt eksempelområde fra kodelisten \"Posisjonskvalitet\".",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "eksakt",
+              "label": "Eks: gps-posisjon, veikryss, hushjørne."
+            },
+            {
+              "value": "eiendomAdresseKjentPunkt",
+              "label": "Lokasjon kan knyttes til eiendom, adresse eller kjent fast punkt (som tjern eller topp)"
+            },
+            {
+              "value": "nabolagKvartal",
+              "label": "Lokasjon kan knyttes til nabolag/kvartal, eller tilsvarende areal."
+            },
+            {
+              "value": "byTettsted",
+              "label": "By/tettsted eller tilsvarende areal"
+            },
+            {
+              "value": "kommune",
+              "label": "Lokasjon er knyttet til kommune"
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Verdien er ikke lagt inn."
+            }
+          ],
+          "definition": "Beskrivelse av kvaliteten på stedfestingen. Angir grad av presisjon knyttet til posisjon."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelsesrelatert"
+      ],
+      "associations": [
+        {
+          "target": "Hendelse"
+        },
+        {
+          "target": "Tiltakslokasjon"
+        },
+        {
+          "target": "Observasjon",
+          "role": "observasjon",
+          "cardinality": "1..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Observasjon",
+    "description": "Registrerte iakttakelser/fenomener som er relevante for hendelsen.\nMerknad: Observasjoner er knyttet til objekt, jf.  kodeliste for objekttyper.",
+    "attributes": [
+      {
+        "name": "observasjonsmåte",
+        "type": "Observasjonsmåte",
+        "description": "Angir hvordan man har observert.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "sett",
+              "label": "Observsjonen er sett av noen."
+            },
+            {
+              "value": "berørt",
+              "label": "Observasjonen er gjort ved berøring."
+            },
+            {
+              "value": "hørt",
+              "label": "observasjon er gjort ved hørsel."
+            },
+            {
+              "value": "luktet",
+              "label": "observasjon er gjort ved lukt."
+            },
+            {
+              "value": "annet",
+              "label": "Objekter som ikke inngår i de forhåndsdefinerte typene."
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Verdien er ikke lagt inn."
+            }
+          ],
+          "definition": "Angir hvordan observasjonen er gjort av observatør: sett, hørt, berørt, luktet, annet, ikke satt."
+        }
+      },
+      {
+        "name": "observasjonskvalitet",
+        "type": "Observasjonskvalitet",
+        "description": "Informasjonens pålitelighet og nøyaktighet (som ikke gjelder posisjonskvalitet).",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "høy",
+              "label": "Høy kvalitet"
+            },
+            {
+              "value": "middels",
+              "label": "Middels kvalitet"
+            },
+            {
+              "value": "lav",
+              "label": "Lav kvalitet"
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "ikkeSatt"
+            }
+          ],
+          "definition": "Informasjonens pålitelighet og nøyaktighet (som ikke gjelder posisjonskvalitet)."
+        }
+      },
+      {
+        "name": "observasjonFraTid",
+        "type": "DateTime",
+        "description": "starttidspunkt for observasjonen.",
+        "cardinality": "1"
+      },
+      {
+        "name": "observasjonTilTid",
+        "type": "DateTime",
+        "description": "sluttidspunkt for observasjonen.",
+        "cardinality": "1"
+      },
+      {
+        "name": "objektPosisjon",
+        "type": "GM_Objekt",
+        "description": "den angitte posisjonen til objektet, angitt fra observatør.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "observertFraPosisjon",
+        "type": "GM_Object",
+        "description": "Hvor observasjonen ble observert fra. Dette kan være et eksakt punkt, men det kan også bli angitt som for eksempel en veistrekning eller et område.",
+        "cardinality": "1"
+      },
+      {
+        "name": "posisjonskvalitet",
+        "type": "Posisjonskvalitet",
+        "description": "Dette er en grov angivelse av hvor presist man har angitt posisjonen til objektet, basert på utsrekningen av et utvalg av områder. Dersom man vet at observasjonen er gjort i en liten skog, kan man velge å angi posisjonskvaliteten til \"nabolagKvartal\". Dersom man bare får opplyst at observasjonen er gjort i en bestemt stor skog, kan man benytte verdien \"byTettsted\".",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "eksakt",
+              "label": "Eks: gps-posisjon, veikryss, hushjørne."
+            },
+            {
+              "value": "eiendomAdresseKjentPunkt",
+              "label": "Lokasjon kan knyttes til eiendom, adresse eller kjent fast punkt (som tjern eller topp)"
+            },
+            {
+              "value": "nabolagKvartal",
+              "label": "Lokasjon kan knyttes til nabolag/kvartal, eller tilsvarende areal."
+            },
+            {
+              "value": "byTettsted",
+              "label": "By/tettsted eller tilsvarende areal"
+            },
+            {
+              "value": "kommune",
+              "label": "Lokasjon er knyttet til kommune"
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Verdien er ikke lagt inn."
+            }
+          ],
+          "definition": "Beskrivelse av kvaliteten på stedfestingen. Angir grad av presisjon knyttet til posisjon."
+        }
+      },
+      {
+        "name": "observatør",
+        "type": "Observatør",
+        "description": "Person eller sensor som gjør en observasjon.",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "kontaktinformasjon",
+            "type": "CharacterStreng",
+            "description": "Kontaktinformasjon",
+            "cardinality": "1"
+          },
+          {
+            "name": "OPSoperatør",
+            "type": "Boolean",
+            "description": "Angir om operatøren er tilknyttet OPS.",
+            "cardinality": "1"
+          },
+          {
+            "name": "sensor",
+            "type": "Boolean",
+            "description": "om observasjonen er gjort fra en automatisk sensor.",
+            "cardinality": "1"
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Hendelsesrelatert"
+      ],
+      "associations": [
+        {
+          "target": "Objekt",
+          "role": "objekt",
+          "cardinality": "1..*"
+        },
+        {
+          "target": "Observatør",
+          "role": "observatør",
+          "cardinality": "1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ressurs",
+    "description": "Transportmiddel, personell, utstyr, materiell, etc. som kan mobiliseres for å støtte innsats og håndtering av en hendelse.",
+    "attributes": [
+      {
+        "name": "posisjon",
+        "type": "Punkt",
+        "description": "Angir ressursens posisjon (statisk/dynamisk) til enhver tid, innhentet fra relevant tjeneste.",
+        "cardinality": "1"
+      },
+      {
+        "name": "aktør",
+        "type": "Aktør",
+        "description": "Aktører fra kodelsisten \"Aktør\". I hovedsak nød- og beredskapsetater.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "politi",
+              "label": "Politi"
+            },
+            {
+              "value": "helse",
+              "label": "Helse"
+            },
+            {
+              "value": "brann",
+              "label": "Brann"
+            },
+            {
+              "value": "HRS",
+              "label": "HRS"
+            },
+            {
+              "value": "forsvar",
+              "label": "Forsvar"
+            },
+            {
+              "value": "sivilforsvar",
+              "label": "Sivilforsvar"
+            },
+            {
+              "value": "industrivern",
+              "label": "Industriens egen beredskap som raskt kan håndtere hendelser før nødetatene kommer."
+            },
+            {
+              "value": "frivilligeOrganisasjoner",
+              "label": "Frivillige organisasjoner som har en rolle i håndteringen av en hendelse (inkluderer blant annet Røde Kors Hjelpekorps, Norsk Folkehjelp Sanitet, Redningsselskapet, Norske Redningshunder, Norsk Radio Relæ Liga, Speidernes Beredskapsgrupper, Norsk Grotteforbund, NLFs Flytjeneste)."
+            },
+            {
+              "value": "offentligeAktører",
+              "label": "Inkluderer statlige og kommunale virksomheter (f.eks. statsforvalter, kommunens krisestab)."
+            },
+            {
+              "value": "andreAktører",
+              "label": "Inkluderer relevant ekspertise (som ikke knyttes til bestemt virksomhet) eller andre som bidrar i eller får en rolle i hendelsen (f.eks. privatpersoner)."
+            }
+          ],
+          "definition": "En kodelsiste med aktører. I hovedsak nød- og beredskapsetater."
+        }
+      },
+      {
+        "name": "ressursID",
+        "type": "CharacterString",
+        "description": "Aktørenes ID/kallesignal på egne ressurser.",
+        "cardinality": "1"
+      },
+      {
+        "name": "estimertAnkomsttid",
+        "type": "DateTime",
+        "description": "Når ressursen forventes å kunne være på hendelsesstedet.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "tilgjengelighetOps",
+        "type": "TilgjengelighetOps",
+        "description": "Angir tilgjengeligheten av ressurser sett fra operasjonssentralens perspektiv, inkludert både operative og potensielt tilgjengelige ressurser.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "opptatt",
+              "label": "Ressurs er tildelt hendelse."
+            },
+            {
+              "value": "delvisTilgjengelig",
+              "label": "Ressurs kan tildeles hendelse på kort varsel."
+            },
+            {
+              "value": "ledig",
+              "label": "Ressurs kan tildeles hendelse umiddelbart."
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Tilgjengelighet ikke angitt."
+            }
+          ],
+          "definition": "Angir tilgjengeligheten av ressurser sett fra operasjonssentralens perspektiv, inkludert både operative og potensielt tilgjengelige ressurser."
+        }
+      },
+      {
+        "name": "tilgjengelighetHendelse",
+        "type": "TilgjengelighetHendelse",
+        "description": "Angir tilgjengeligheten av ressurser som er tilordnet en pågående hendelse.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "opptatt",
+              "label": "Ressurs er i aktiv innsats i hendelsen."
+            },
+            {
+              "value": "delvisTilgjengelig",
+              "label": "Ressurs er i aktiv innsats, men kan tildeles andre oppgaver på kort varsel."
+            },
+            {
+              "value": "ledig",
+              "label": "Ressurs er tilgjengelig for nye tiltak i hendelsen."
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Tilgjengelighet ikke angitt."
+            }
+          ],
+          "definition": "Angir tilgjengeligheten av ressurser tilordnet hendelsen."
+        }
+      },
+      {
+        "name": "kommentar",
+        "type": "CharacterString",
+        "description": "Mulighet for å legge inn kommentar som fritekst.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "status",
+        "type": "CharacterString",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": [
+        {
+          "target": "Hendelse",
+          "role": "hendelse",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "Tiltakslokasjon",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Drone",
+    "description": "Et ubemannet fartøy som kan operere i luft, på land, og/eller til vanns, enten autonomt eller fjernstyrt.",
+    "attributes": [
+      {
+        "name": "synsfelt",
+        "type": "Flate",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "dronetype",
+        "type": "TypeDrone",
+        "description": "Dronetyper",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "droneLuft",
+              "label": "Ubemannede luftfartøy som kan operere autonomt eller fjernstyres, kjent som Unmanned Aerial Vehicles (UAV)."
+            },
+            {
+              "value": "droneVann",
+              "label": "Ubemannede systemer designet for bruk på eller under vann som kan operere autonomt eller fjernstyres, ofte kalt maritime droner eller Unmanned Underwater Vehicles (UUV)."
+            },
+            {
+              "value": "droneLand",
+              "label": "Ubemannede bakkebaserte kjøretøy som kan operere autonomt eller fjernstyres, også kalt Unmanned Ground Vehicles (UGV)."
+            },
+            {
+              "value": "droneAnnen",
+              "label": "Droner som kombinerer egenskaper fra ulike miljøer, designet for å operere både til vanns og til lands – og eventuelt også i lufta. Disse omtales ofte som amfibiedroner eller flerbruksdroner."
+            }
+          ],
+          "definition": "Kategorier av dronetyper."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Ressurs"
+      ],
+      "associations": [
+        {
+          "target": "Personell",
+          "role": "droneoperatør",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Depot",
+    "description": "Et lager eller oppbevaringssted for utstyr, forsyninger eller ressurser, ofte strategisk plassert for å støtte operasjoner og sikre rask tilgang under nødsituasjoner eller beredskap.",
+    "attributes": [
+      {
+        "name": "utstyr",
+        "type": "TypeUtstyr",
+        "cardinality": "0..*",
+        "valueDomain": {
+          "definition": "Lister som defineres fra nødetatene. Dette er foreløpig utelatt fra standarden."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Ressurs"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "AnnenRessurs",
+    "description": "Andre ikke kategoriserte ressurser.",
+    "attributes": [
+      {
+        "name": "type",
+        "type": "TypeAnnenRessurs",
+        "description": "Andre ikke kategoriserte ressurser. Restkategoriene er listet opp i \"TypeAnnenRessurs\".",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "hund",
+              "label": "Inkluderer politihund, redningshund mv."
+            },
+            {
+              "value": "aggregat",
+              "label": "Strømagregat"
+            },
+            {
+              "value": "annenRessurs",
+              "label": "Annen ressurs inkluderer også utstyr som ikke kan knyttes til Transportmiddel eller Personell."
+            }
+          ],
+          "definition": "Ressurs som ikke inngår i forhåndsdefinerte ressurskategorier."
+        }
+      },
+      {
+        "name": "utstyr",
+        "type": "TypeUtstyr",
+        "description": "Utstyr",
+        "cardinality": "0..*",
+        "valueDomain": {
+          "definition": "Lister som defineres fra nødetatene. Dette er foreløpig utelatt fra standarden."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Ressurs"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Transportmiddel",
+    "description": "Inkluderer alle transportmidler definert under ressurstypen.",
+    "attributes": [
+      {
+        "name": "type",
+        "type": "TypeTransportmiddel",
+        "description": "Kategorier av transportmiddel.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "litenBil",
+              "label": "Personbil/stasjonsvogn – slik som legebil, innsatslederbil og kommandobil."
+            },
+            {
+              "value": "storBil",
+              "label": "Inkluderer ambulanse, mannskapsbil, dykkerbil, høyderedskap, tankbil, dronebil mv."
+            },
+            {
+              "value": "båt",
+              "label": "Inkluderer ambulanse/legebåt, brannbåt, politibåt, RS-båt, mv."
+            },
+            {
+              "value": "helikopterUtenLift",
+              "label": "Helikopter"
+            },
+            {
+              "value": "helikopterMedLift",
+              "label": "Helikopter"
+            },
+            {
+              "value": "fly",
+              "label": "Fly"
+            },
+            {
+              "value": "tog",
+              "label": "Tog"
+            },
+            {
+              "value": "snøscooter",
+              "label": "Snøscooter"
+            },
+            {
+              "value": "vannscooter",
+              "label": "Vannscooter"
+            },
+            {
+              "value": "hest",
+              "label": "Hest"
+            },
+            {
+              "value": "motorsykkel",
+              "label": "Motorsykkel"
+            },
+            {
+              "value": "sykkel",
+              "label": "Sykkel"
+            },
+            {
+              "value": "buss",
+              "label": "Buss"
+            },
+            {
+              "value": "annetTransportmiddel",
+              "label": "Transportmiddel som ikke inngår i forhåndsdefinerte transportmiddelkategorier."
+            }
+          ],
+          "definition": "Kategorier av transportmiddel."
+        }
+      },
+      {
+        "name": "rolle",
+        "type": "TypeRolle",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "innsatsleder",
+              "label": "Nødetatenes øverste leder på hendelsesstedet."
+            },
+            {
+              "value": "delleder",
+              "label": "Person med ansvar for ledelse av deloppgaver under hendelsen (f.eks. medisinsk leder, ressurskoordinator, fagleder innen spesifikke områder mv.)."
+            },
+            {
+              "value": "lege",
+              "label": "Lege"
+            }
+          ],
+          "definition": "Kategorier av roller."
+        }
+      },
+      {
+        "name": "utstyr",
+        "type": "TypeUtstyr",
+        "cardinality": "0..*",
+        "valueDomain": {
+          "definition": "Lister som defineres fra nødetatene. Dette er foreløpig utelatt fra standarden."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Ressurs"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "Personell",
+    "description": "Inkluderer alt personell definert under ressurstypen.",
+    "attributes": [
+      {
+        "name": "rolle",
+        "type": "TypeRolle",
+        "description": "Personellroller",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "innsatsleder",
+              "label": "Nødetatenes øverste leder på hendelsesstedet."
+            },
+            {
+              "value": "delleder",
+              "label": "Person med ansvar for ledelse av deloppgaver under hendelsen (f.eks. medisinsk leder, ressurskoordinator, fagleder innen spesifikke områder mv.)."
+            },
+            {
+              "value": "lege",
+              "label": "Lege"
+            }
+          ],
+          "definition": "Kategorier av roller."
+        }
+      },
+      {
+        "name": "typeEkspert",
+        "type": "TypeEkspert",
+        "description": "Person med spesialistkompetanse som er tildelt en rådgivende rolle ifm. håndteringen av en hendelse.",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "CBRNE",
+              "label": "Ekspertise innen kjemiske, biologiske, radiologiske, nukleære og eksplosive trusler, inkludert helserelevant ekspertise for å håndtere og respondere på farer knyttet til farlige stoffer og eksplosiver."
+            },
+            {
+              "value": "geotekniskRiskoOgNaturfare",
+              "label": "Ekspertise innen jordstabilitet, grunnforhold, skred, seismisk risiko mv."
+            },
+            {
+              "value": "flom",
+              "label": "Ekspertise innen flom, flomutsatte områder, flomdynamikk og tiltak mot flomfare."
+            },
+            {
+              "value": "brannSkogbrann",
+              "label": "Ekspertise innen brannslukking, spredning, evakuering mv."
+            },
+            {
+              "value": "værKlimarisiko",
+              "label": "Ekspertise innen værforhold, klimarisiko, og ekstreme værhendelser, inkludert hvordan klimaendringer påvirker hendelser som flom, tørke og stormer."
+            },
+            {
+              "value": "sjøKystfare",
+              "label": "Ekspertise innen kyst- og sjørelaterte hendelser, som stormflo, kysterosjon og maritime ulykker."
+            },
+            {
+              "value": "epidemiologiSmittevern",
+              "label": "Ekspertise innen smitte og sykdomsutbrudd, inkludert responstiltak."
+            },
+            {
+              "value": "transportInfrastruktursikkerhet",
+              "label": "Ekspertise innen transportnettverk og kritisk infrastruktur, som veier, jernbane, kraftnett mv."
+            },
+            {
+              "value": "søkRedning",
+              "label": "Ekspertise innen søk- og redningsoperasjoner, inkludert USAR."
+            },
+            {
+              "value": "annenEkspertise",
+              "label": "Ekspertise innen områder som ikke dekkes av de andre kategoriene."
+            }
+          ],
+          "definition": "Person med spesialistkompetanse som er tildelt en rådgivende rolle ifm. håndteringen av en hendelse."
+        }
+      },
+      {
+        "name": "utstyr",
+        "type": "TypeUtstyr",
+        "description": "Utstyr",
+        "cardinality": "0..*",
+        "valueDomain": {
+          "definition": "Lister som defineres fra nødetatene. Dette er foreløpig utelatt fra standarden."
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Ressurs"
+      ],
+      "associations": [
+        {
+          "target": "Transportmiddel",
+          "role": "transportmiddel",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tiltakslokasjon",
+    "description": "Lokasjon til tiltak som planlegges og eventuelt gjennomføres for å håndtere hendelsen.",
+    "attributes": [
+      {
+        "name": "posisjon",
+        "type": "CharacterString",
+        "description": "Geometri (punkt/linje/flate) knyttet til tiltak.",
+        "cardinality": "1"
+      },
+      {
+        "name": "type",
+        "type": "TypeTiltakslokasjon",
+        "description": "Kode fra en kodeliste med relevante tiltak.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "oppmøtested",
+              "label": "Et forhåndsdefinert sted hvor innsatspersonell først møter."
+            },
+            {
+              "value": "bevarÅsted",
+              "label": "\"Bevar åsted\" innebærer at ingen skal røre noe uten at nødvendig dokumentasjon av omstendighetene er foretatt og sikring av spor er gjennomført, med mindre det er nødvendig for å redde liv, pågripe eller berge større verdier."
+            },
+            {
+              "value": "møtepunkt",
+              "label": "Punkt der nødetatene har avtalt å møtes. Inkluderer situasjoner der samhandling mellom ulike ressurser er nødvendig."
+            },
+            {
+              "value": "leveringssted",
+              "label": "Behandlingssted for levering av pasienter."
+            },
+            {
+              "value": "kontrollpunkt",
+              "label": "Bemannet punkt for ulike typer kontroll, inkludert kontroll av tilgang til avgrensede områder, registrering av personer som evakueres (evakueringspunkt) etc."
+            },
+            {
+              "value": "kommandoplass",
+              "label": "kommandoplass"
+            },
+            {
+              "value": "innsatsledersKO",
+              "label": "Stedet hvor innsatslederne fra brann, politi og helse samles for å lede og koordinere innsatsen under en hendelse. Dette fungerer som et taktisk knutepunkt for informasjonsutveksling og beslutningstaking. (IL-KO)."
+            },
+            {
+              "value": "helsehjelp",
+              "label": "Et dedikert område på eller nær et skadested hvor medisinsk behandling gis til skadde eller syke personer. Kan inkludere fasiliteter for førstehjelp og mer omfattende medisinsk hjelp."
+            },
+            {
+              "value": "triage",
+              "label": "Arbeidsprosess med hensikt å bestemme prioritering til behandling og transport basert på hvor alvorlig pasientenes medisinske tilstand er (Helsedirektoratet)"
+            },
+            {
+              "value": "dekontaminering",
+              "label": "Dekontaminasjon: fjerning av forurensninger (kontaminasjoner) som har spredt seg innen et begrenset område. Slike forurensninger kan finnes på faste overflater av ulik type, i væsker eller i gasser. De kan bestå av giftige eller miljøresistente kjemikalier, mikroorganismer (bakterier o.l.) og av radioaktive substanser (SNL)."
+            },
+            {
+              "value": "samleplass",
+              "label": "Inkluderer sampleplass for døde, skadde, uskadde, vitner, berørte etc."
+            },
+            {
+              "value": "mottakssenter",
+              "label": "Sted hvor man mottar et større antall evakuerte og/ eller skadde fra en hendelse på sjøen eller i utlandet. Mottakssenteret kan også benyttes som en samleplass for evakuerte eller skadde eller som et evakueringspunkt dersom det er hensiktsmessig (PBS 1)."
+            },
+            {
+              "value": "evakuerteOgPårørendesenter",
+              "label": "Oppholdssted for evakuerte som ikke er skadet, samt oppmøtested for pårørende."
+            },
+            {
+              "value": "presseOgMedia",
+              "label": "Et dedikert område for håndtering av mediekontakt under hendelser eller operasjoner, hvor journalister kan få informasjon."
+            },
+            {
+              "value": "observasjonspost",
+              "label": "En strategisk plassert posisjon for overvåking og innsamling av informasjon om et bestemt område, ofte brukt til å identifisere risiko, observere hendelser eller koordinere respons."
+            },
+            {
+              "value": "helikopterlandingsplass",
+              "label": "Et tilrettelagt område for trygg landing og avgang av helikoptre, ofte brukt i redningsarbeid, beredskap eller transport til vanskelig tilgjengelige steder."
+            },
+            {
+              "value": "sambandsinstallasjon",
+              "label": "En teknisk installasjon som muliggjør kommunikasjon og informasjonsdeling, ofte brukt i nødetatens og beredskapsaktørers arbeid for å sikre effektiv koordinering."
+            },
+            {
+              "value": "depot",
+              "label": "Lager (opprettet for håndtering av hendelsen) der det oppbevares større mengder materiell for senere bruk."
+            },
+            {
+              "value": "parkeringsplass",
+              "label": "Parkeringsplass"
+            },
+            {
+              "value": "kjørerute",
+              "label": "Angivelse av definert kjørerute fra ressursens lokasjon til hendelsessted. Innhentet fra relevant tjeneste."
+            },
+            {
+              "value": "sikkerRute",
+              "label": "Sikker rute for nødetatene inn og ut fra hendelsessted (inkl. for helsepersonell som skal inn til skadde personer, samt evakueringslinje/akse, jf. Håndbok for redningstjeneste). Inkluderer sikker innpå marsj (polititerminologi.)."
+            },
+            {
+              "value": "avsperring",
+              "label": "Sperringstiltak oppsatt ifm. en hendelse som marker definerte områder hvor kun nødetater og annet autorisert personell kan oppholde seg. Avsperring settes i kartet iht. etablerte prosedyrer for nødetatene."
+            },
+            {
+              "value": "evakueringssone",
+              "label": "Sone som personer skal evakueres fra."
+            },
+            {
+              "value": "søketeigsone",
+              "label": "Definert område hvor det søkes etter savnede. Merkes iht gjeldende regler for søkeoppdrag (Se Nasjonal veileder søk etter savnet person på land (2022))."
+            },
+            {
+              "value": "faresone",
+              "label": "Definerte områder rundt hendelsen som indikerer grad av risiko for de som oppholder seg der."
+            },
+            {
+              "value": "sikring",
+              "label": "Forebyggende tiltak i forbindelse med brann, flom, utslipp etc."
+            },
+            {
+              "value": "arbeidsområde",
+              "label": "Område som avgrenses for nødetatenes særskilte tiltak under håndteringen av hendelsen."
+            },
+            {
+              "value": "slukking",
+              "label": "Prosessen med å bekjempe og eliminere brann ved hjelp av ulike metoder og utstyr for å stoppe brannens spredning og redusere skadeomfanget."
+            },
+            {
+              "value": "vannbombing",
+              "label": "En metode for brannslukking hvor store mengder vann slippes fra fly eller helikoptre over brannområder, spesielt effektivt ved skogbranner."
+            },
+            {
+              "value": "begrensningslinjeVåt",
+              "label": "En fysisk eller strategisk linje etablert for å hindre videre spredning av brann, ofte ved bruk av naturlige barrierer eller opprettede brannlinjer (Bruk av vann)."
+            },
+            {
+              "value": "begrensningslinjeTørr",
+              "label": "En fysisk eller strategisk linje etablert for å hindre videre spredning av brann, ofte ved bruk av naturlige barrierer eller opprettede brannlinjer (uten bruk av vann)."
+            },
+            {
+              "value": "vannslange",
+              "label": "Slange brukt i brannslukking for å transportere og levere vann til brannstedet."
+            },
+            {
+              "value": "vannpumpe",
+              "label": "Pumpe brukt i brannslukking for å transportere og levere vann til brannstedet."
+            },
+            {
+              "value": "sektorgrense",
+              "label": "En definert avgrensning mellom ulike sektorer på et skadested, som brukes for å organisere og koordinere innsatsen effektivt."
+            },
+            {
+              "value": "referansesystem",
+              "label": "System som brukes for å identifisere og beskrive spesifikke steder innenfor et område. Brukes ofte for koordinering, spesielt i nødsituasjoner eller komplekse omgivelser."
+            },
+            {
+              "value": "annetTiltak",
+              "label": "Ikke forhåndsdefinerte tiltak"
+            }
+          ],
+          "definition": "En kodeliste med relevante tiltak."
+        }
+      },
+      {
+        "name": "aktør",
+        "type": "Aktør",
+        "description": "Aktører fra kodelsisten \"Aktør\". I hovedsak nød- og beredskapsetater.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "politi",
+              "label": "Politi"
+            },
+            {
+              "value": "helse",
+              "label": "Helse"
+            },
+            {
+              "value": "brann",
+              "label": "Brann"
+            },
+            {
+              "value": "HRS",
+              "label": "HRS"
+            },
+            {
+              "value": "forsvar",
+              "label": "Forsvar"
+            },
+            {
+              "value": "sivilforsvar",
+              "label": "Sivilforsvar"
+            },
+            {
+              "value": "industrivern",
+              "label": "Industriens egen beredskap som raskt kan håndtere hendelser før nødetatene kommer."
+            },
+            {
+              "value": "frivilligeOrganisasjoner",
+              "label": "Frivillige organisasjoner som har en rolle i håndteringen av en hendelse (inkluderer blant annet Røde Kors Hjelpekorps, Norsk Folkehjelp Sanitet, Redningsselskapet, Norske Redningshunder, Norsk Radio Relæ Liga, Speidernes Beredskapsgrupper, Norsk Grotteforbund, NLFs Flytjeneste)."
+            },
+            {
+              "value": "offentligeAktører",
+              "label": "Inkluderer statlige og kommunale virksomheter (f.eks. statsforvalter, kommunens krisestab)."
+            },
+            {
+              "value": "andreAktører",
+              "label": "Inkluderer relevant ekspertise (som ikke knyttes til bestemt virksomhet) eller andre som bidrar i eller får en rolle i hendelsen (f.eks. privatpersoner)."
+            }
+          ],
+          "definition": "En kodelsiste med aktører. I hovedsak nød- og beredskapsetater."
+        }
+      },
+      {
+        "name": "status",
+        "type": "Status",
+        "description": "En beskrivelse av tilstanden for fremdrift i tiltaket.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "planlagt",
+              "label": "Tiltaket er planlagt."
+            },
+            {
+              "value": "pågåendeEllerAktivt",
+              "label": "Tiltaket er pågående eller aktivt."
+            },
+            {
+              "value": "gjennomførtEllerAvsluttet",
+              "label": "Tiltaket er gjennomført eller avsluttet."
+            }
+          ],
+          "definition": "En beskrivelse av tilstanden for fremdrift i tiltaket."
+        }
+      },
+      {
+        "name": "prioritetTilak",
+        "type": "Integer",
+        "description": "Prioritet indikerer den enkelte etats planlagte rekkefølge på tiltak.",
+        "cardinality": "1"
+      },
+      {
+        "name": "typeFaresone",
+        "type": "TypeFaresone",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "rødSone",
+              "label": "Område med høy risiko for liv/helse."
+            },
+            {
+              "value": "gulSone",
+              "label": "Område med risiko for liv/helse."
+            },
+            {
+              "value": "grønnSone",
+              "label": "Område med lav risiko for liv/helse."
+            }
+          ],
+          "definition": "Kategorier av faresone angitt med farge."
+        }
+      },
+      {
+        "name": "typeRute",
+        "type": "TypeRute",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "enveis",
+              "label": "Man kan bare kjøre i en retning."
+            },
+            {
+              "value": "toveis",
+              "label": "Man kan bare kjøre i begge retninger."
+            },
+            {
+              "value": "ikkeSatt",
+              "label": "Kjøreretning er ikke satt."
+            }
+          ],
+          "definition": "En beskrivelse om det er enveis eller toveis kjøreretning."
+        }
+      },
+      {
+        "name": "bevarÅsted",
+        "type": "Boolean",
+        "description": "\"Bevar åsted\" innebærer at ingen skal røre noe uten at nødvendig dokumentasjon av omstendighetene er foretatt og sikring av spor er gjennomført, med mindre det er nødvendig for å redde liv, pågripe eller berge større verdier.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kommentar",
+        "type": "CharacterString",
+        "description": "Mulighet for å legge inn kommentar som fritekst.",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": [
+        {
+          "target": "Hendelse",
+          "role": "hendelse"
+        },
+        {
+          "target": "Objekt",
+          "role": "lokasjon",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "Ressurs"
+        },
+        {
+          "target": "X___TiltakOppgave"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kontekst",
+    "description": "Informasjon som i utgangspunktet ikke er knyttet til hendelsen, men som det er viktig/relevant for nødetatene å kjenne til fordi det potensielt kan eller bør påvirke beslutninger om tiltak/håndtering.",
+    "attributes": [
+      {
+        "name": "type",
+        "type": "TypeKontekst",
+        "description": "En kategorisering av ulik type kontekst.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "farekilder",
+              "label": "Identifisert kilde som kan utgjøre en fare for spredning av risiko under håndteringen av en hendelse, f. eks. eksplosiver, radioaktiv agens etc."
+            },
+            {
+              "value": "beskyttelsesverdigInfrastruktur",
+              "label": "Identifisert infrastruktur som kan utsettes for økt risiko som følge av hendelsen."
+            },
+            {
+              "value": "sårbartObjekt",
+              "label": "Objekter som kan være spesielt sårbare som følge av hendelsen, slik som skoler, barnehager, sykehjem, kulturminner etc."
+            },
+            {
+              "value": "ødelagtInfrastruktur",
+              "label": "Ødelagt infrastruktur som aktørene i hendelsen bør vite om."
+            },
+            {
+              "value": "folkeansamling",
+              "label": "Konsentrasjon av mennesker, f.eks. knyttet til uteliv, arrangementer o.l."
+            },
+            {
+              "value": "hinderSperring",
+              "label": "Fysisk hindring/sperring som kan påvirke fremkommeligheten under en hendelse uten å være en del av selve hendelsen, f.eks. veltede trær, veisperringer eller ødelagte broer som hindrer transport og evakuering."
+            },
+            {
+              "value": "spenningsløsKraftledning",
+              "label": "Kraftledning som er frakoblet strømnettet og dermed ikke lenger utgjør fare for elektrisk støt. Brukes som varsel i hendelseshåndtering for å informere om at det er trygt å bevege seg i nærheten eller under ledningen, for eksempel ved en togulykke."
+            },
+            {
+              "value": "annenKontekst",
+              "label": "Kontekstuell informasjon som ikke inngår i forhåndsdefinerte kategorier."
+            }
+          ],
+          "definition": "En kategorisering av ulik type kontekst."
+        }
+      },
+      {
+        "name": "aktør",
+        "type": "Aktør",
+        "description": "Aktører fra kodelsisten \"Aktør\", som er relevant for kontekstregistreringen.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "politi",
+              "label": "Politi"
+            },
+            {
+              "value": "helse",
+              "label": "Helse"
+            },
+            {
+              "value": "brann",
+              "label": "Brann"
+            },
+            {
+              "value": "HRS",
+              "label": "HRS"
+            },
+            {
+              "value": "forsvar",
+              "label": "Forsvar"
+            },
+            {
+              "value": "sivilforsvar",
+              "label": "Sivilforsvar"
+            },
+            {
+              "value": "industrivern",
+              "label": "Industriens egen beredskap som raskt kan håndtere hendelser før nødetatene kommer."
+            },
+            {
+              "value": "frivilligeOrganisasjoner",
+              "label": "Frivillige organisasjoner som har en rolle i håndteringen av en hendelse (inkluderer blant annet Røde Kors Hjelpekorps, Norsk Folkehjelp Sanitet, Redningsselskapet, Norske Redningshunder, Norsk Radio Relæ Liga, Speidernes Beredskapsgrupper, Norsk Grotteforbund, NLFs Flytjeneste)."
+            },
+            {
+              "value": "offentligeAktører",
+              "label": "Inkluderer statlige og kommunale virksomheter (f.eks. statsforvalter, kommunens krisestab)."
+            },
+            {
+              "value": "andreAktører",
+              "label": "Inkluderer relevant ekspertise (som ikke knyttes til bestemt virksomhet) eller andre som bidrar i eller får en rolle i hendelsen (f.eks. privatpersoner)."
+            }
+          ],
+          "definition": "En kodelsiste med aktører. I hovedsak nød- og beredskapsetater."
+        }
+      },
+      {
+        "name": "kommentar",
+        "type": "CharacterString",
+        "description": "Mulighet for å legge inn kommentar som fritekst.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "posisjon",
+        "type": "Posisjon",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "geometri",
+            "type": "GM_Object",
+            "cardinality": "1"
+          },
+          {
+            "name": "Referanse",
+            "type": "Identifikasjon",
+            "cardinality": "0..1",
+            "attributes": [
+              {
+                "name": "lokalId",
+                "type": "uuid",
+                "description": "lokal identifikator av et objekt\n\nMerknad: Det er dataleverendørens ansvar å sørge for at den lokale identifikatoren er unik innenfor navnerommet.",
+                "cardinality": "1"
+              },
+              {
+                "name": "navnerom",
+                "type": "CharacterString",
+                "description": "navnerom som unikt identifiserer datakilden til et objekt, anbefales å være en http-URI\n\nEksempel: http://data.geonorge.no/SentraltStedsnavnsregister/1.0\n\nMerknad : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og må være registrert i data.geonorge.no eller data.norge.no",
+                "cardinality": "1"
+              },
+              {
+                "name": "versjonId",
+                "type": "CharacterString",
+                "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+                "cardinality": "0..1"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "Felles"
+      ],
+      "associations": [
+        {
+          "target": "Hendelse",
+          "role": "hendelse"
+        }
+      ]
+    }
+  }
+]
