@@ -1,12 +1,15 @@
-# metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b # adm enhet
-metadataId: 779a554b-fc3e-48a6-b202-561b07e9d4c2 #planlegging igangsatt
+# metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b   # adm enhet
+# metadataId: 779a554b-fc3e-48a6-b202-561b07e9d4c2   # planlegging igangsatt
+metadataId: c114a146-821f-4570-aefe-a65e67c0edba     # regplanforslag
 output_directory: produktspesifikasjon
-product_slug: planleggingIgangsatt
+product_slug: regplanforslag
+# product_slug: planleggingIgangsatt
 # product_slug: admenheter
 updated: 2026-03-09
 # 
 #ogc_feature_api: https://kos-pygeoapi.atkv3-dev.kartverket.cloud/collections
-xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Arealplan 5.0/PlanleggingIgangsatt.xml
+#xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Arealplan 5.0/PlanleggingIgangsatt.xml
+xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Reguleringsplanforslag/Regplanforslag-2023_kodeendring2025.xml
 #include_only_features:
 #  - Uttak
 #
