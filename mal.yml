@@ -17,9 +17,9 @@
 # metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b   # adm enhet
 # product_slug: admenheter
 
-metadataId: 7d220e23-5835-4f83-ba96-1156c154e566   # landformer
-product_slug: landformar
-xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/NGU/LandformerNiN-1.0_Utkast.xml
+# metadataId: 7d220e23-5835-4f83-ba96-1156c154e566   # hendelser
+product_slug: hendelser
+xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/DSB/Geografiske hendelser.xml
 
 
 output_directory: produktspesifikasjon
