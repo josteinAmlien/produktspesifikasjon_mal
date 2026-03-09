@@ -1,0 +1,511 @@
+@startuml
+title Reguleringsplanforslag - Høring og offentlig ettersyn - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  abstract class FellesegenskaperKart <<featureType>> {
+    ' Ingen attributter
+  }
+
+  abstract class FellesegenskaperArealplan <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class Arealplan <<featureType>> {
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + prosesshistorie [0..*] : CharacterString
+    + informasjon [0..*] : CharacterString
+    + link [0..*] : CharacterString
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + plantype [1] : RpPlantype
+    + plannavn [1] : CharacterString
+    + planstatus [1] : Planstatus
+    + omPlanbestemmelser [1] : OmPlanbestemmelser
+    + lovreferanse [1] : Lovreferanse
+    + lovreferanseBeskrivelse [0..1] : CharacterString
+    + versjonsdato [0..1] : Date
+    + versjonsnummer [0..1] : CharacterString
+    + alternativReferanse [0..1] : CharacterString
+    + forslagsstillerType [0..1] : ForslagsstillerType
+    + planhøring [0..1] : Planhøring
+  }
+
+  class RpGrense <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + grense [1] : GM_Curve
+  }
+
+  class "RpOmråde" as RpOmr_de <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + område [1] : GM_MultiSurface
+  }
+
+  abstract class RpObjekt <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class "RpFormålGrense" as RpForm_lGrense <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + grense [1] : GM_Curve
+  }
+
+  class "RpHandlingOmråde" as RpHandlingOmr_de <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + område [1] : GM_Surface
+  }
+
+  class "RpArealformålOmråde" as RpArealform_lOmr_de <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + område [1] : GM_MultiSurface
+    + arealformål [1] : RpArealformål
+    + feltnavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + eierform [1] : EierformType
+    + utnytting [0..*] : Utnytting
+    + uteoppholdsareal [0..1] : Integer
+    + avkjørselsbestemmelse [0..1] : Avkjørselsbestemmelse
+    + byggverkbestemmelse [0..1] : Byggverkbestemmelse
+  }
+
+  class RpHandlingRom <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + rom [1] : GM_Solid
+  }
+
+  class "RpBåndleggingSone" as RpB_ndleggingSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + båndlegging [1] : RpBåndleggingSoneType
+    + båndlagtFremTil [0..1] : Date
+  }
+
+  abstract class RpHensynSone <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class RpInfrastrukturSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + infrastruktur [1] : RpInfrastrukturSoneType
+  }
+
+  class RpAngittHensynSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + angittHensyn [1] : RpAngittHensynSoneType
+  }
+
+  class "RpStøySone" as RpSt_ySone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + støy [1] : RpStøySoneType
+  }
+
+  class RpFareSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + fare [1] : RpFareSoneType
+  }
+
+  class "RpGjennomføringSone" as RpGjennomf_ringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + gjennomføring [1] : RpGjennomføringSoneType
+  }
+
+  class RpDetaljeringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + detaljering [1] : RpDetaljeringSoneType
+  }
+
+  class RpSikringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + sikring [1] : RpSikringSoneType
+  }
+
+  class RpHensynRom <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + rom [1] : GM_Solid
+  }
+
+  class "RpBestemmelseOmråde" as RpBestemmelseOmr_de <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + område [1] : GM_MultiSurface
+    + bestemmelseHjemmel [1..*] : RpBestemmelseHjemmel
+    + bestemmelseOmrådeNavn [1] : CharacterString
+  }
+
+  class RpBestemmelseRom <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + rom [1] : GM_Solid
+  }
+
+  class RpBestemmelseMidlByggAnlegg <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + område [1] : GM_MultiSurface
+    + bestemmelseOmrådeNavn [1] : CharacterString
+    + gyldigTilDato [1] : Date
+    + avgjørelsesdato [0..1] : Date
+    + saksnummer [0..1] : Saksnummer
+  }
+
+  class RpBestemmelseRegTerreng <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + overflate [1] : GM_Surface
+    + overflateType [1] : RegulertOverflateType
+  }
+
+  class "RpRegulertHøyde" as RpRegulertH_yde <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + linjeforløp [1] : GM_Curve
+    + høydeFraPlanbestemmelse [1] : HøydeFraPlanbestemmelse
+  }
+
+  class RpJuridiskPunkt <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + posisjon [1] : GM_Point
+    + juridiskPunkttype [1] : RpJuridiskPunktType
+    + objektnavn [0..1] : CharacterString
+    + retningsvektor [0..1] : Vector
+  }
+
+  class RpJuridiskLinje <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + linjeforløp [1] : GM_Curve
+    + juridiskLinjetype [1] : RpJuridiskLinjeType
+    + objektnavn [0..1] : CharacterString
+  }
+
+  class "RpPåskrift" as RpP_skrift <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + identifikasjon [1] : Identifikasjon
+    + oppdateringsdato [1] : Date
+    + førsteDigitaliseringsdato [0..1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+    + opphav [0..1] : CharacterString
+    + posisjon [1] : GM_Point
+    + tekststreng [1] : CharacterString
+    + påskriftType [1] : PåskriftType
+    + tekstplassering [0..1] : GM_Primitive
+    + formatering [0..1] : Tekstformatering
+  }
+
+  class Identifikasjon {
+    + lokalId [1] : CharacterString
+    + navnerom [1] : CharacterString
+    + versjonId [0..1] : CharacterString
+  }
+
+  class Posisjonskvalitet {
+    + datafangstmetode [1] : Datafangstmetode
+    + nøyaktighet [0..1] : Integer
+  }
+
+  class NasjonalArealplanId {
+    + kommunenummer [0..1] : Kommunenummer
+    + landkode [0..1] : Landkode
+    + planid [1] : CharacterString
+  }
+
+  class "Planhøring" as Planh_ring {
+    + høringsversjon [1] : Integer
+    + høringsalternativ [0..1] : CharacterString
+    + høringsstart [0..1] : Date
+    + høringsslutt [0..1] : Date
+  }
+
+  class Vertikallag {
+    + lag [1] : CharacterString
+    + referansehøyde [0..1] : Real
+  }
+
+  class Utnytting {
+    + utnyttingstype [1] : Utnyttingstype
+    + utnyttingstall [0..1] : Integer
+    + utnyttingstall_minimum [0..1] : Integer
+  }
+
+  class Saksnummer {
+    + saksår [1] : Integer
+    + sakssekvensnummer [1] : Integer
+  }
+
+  class "HøydeFraPlanbestemmelse" as H_ydeFraPlanbestemmelse {
+    + regulertHøyde [1] : Real
+    + typeHøyde [1] : TypeHøyde
+    + høydereferansesystem [0..1] : Høydereferansesystem
+    + terrengreferanse [0..1] : Terrengreferanse
+  }
+
+  class Tekstformatering {
+    + skrifttype [0..1] : CharacterString
+    + fontStørrelse [0..1] : Integer
+    + referansemålestokk [0..1] : Integer
+  }
+}
+
+  FellesegenskaperArealplan <|-- Arealplan
+  Arealplan --> RpOmr_de : rpOmråde [1..*]
+  RpObjekt <|-- RpGrense
+  RpObjekt <|-- RpOmr_de
+  RpOmr_de --> RpGrense : avgrensesAv [0..*]
+  RpOmr_de --> RpRegulertH_yde : regulertHøyde [0..*]
+  RpOmr_de --> RpBestemmelseMidlByggAnlegg : midlByggAnlegg [0..*]
+  RpOmr_de --> RpDetaljeringSone : detaljering [0..*]
+  RpOmr_de --> RpJuridiskPunkt : juridiskPunkt [0..*]
+  RpOmr_de --> RpArealform_lOmr_de : formål [1..*]
+  RpOmr_de --> RpInfrastrukturSone : infrastruktur [0..*]
+  RpOmr_de --> RpGjennomf_ringSone : gjennomføring [0..*]
+  RpOmr_de --> RpFareSone : fare [0..*]
+  RpOmr_de --> RpBestemmelseOmr_de : bestemmelseOmråde [0..*]
+  RpOmr_de --> RpB_ndleggingSone : båndlegging [0..*]
+  RpOmr_de --> RpSikringSone : sikring [0..*]
+  RpOmr_de --> RpSt_ySone : støy [0..*]
+  RpOmr_de --> RpHensynSone : [0]
+  RpOmr_de --> RpAngittHensynSone : angittHensyn [0..*]
+  RpOmr_de --> RpJuridiskLinje : juridiskLinje [0..*]
+  FellesegenskaperKart <|-- RpObjekt
+  RpObjekt <|-- RpForm_lGrense
+  RpObjekt <|-- RpHandlingOmr_de
+  RpHandlingOmr_de --> RpHandlingRom : rom [0..1]
+  RpObjekt <|-- RpArealform_lOmr_de
+  RpArealform_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+  RpArealform_lOmr_de --> RpHandlingOmr_de : handlingsområde [0..*]
+  RpObjekt <|-- RpHandlingRom
+  RpHensynSone <|-- RpB_ndleggingSone
+  RpObjekt <|-- RpHensynSone
+  RpHensynSone --> RpHensynRom : rom [0..1]
+  RpHensynSone <|-- RpInfrastrukturSone
+  RpHensynSone <|-- RpAngittHensynSone
+  RpHensynSone <|-- RpSt_ySone
+  RpHensynSone <|-- RpFareSone
+  RpHensynSone <|-- RpGjennomf_ringSone
+  RpHensynSone <|-- RpDetaljeringSone
+  RpHensynSone <|-- RpSikringSone
+  RpObjekt <|-- RpHensynRom
+  RpObjekt <|-- RpBestemmelseOmr_de
+  RpBestemmelseOmr_de --> RpBestemmelseRom : rom [0..1]
+  RpBestemmelseOmr_de --> RpBestemmelseRegTerreng : regulertTerreng [0..*]
+  RpObjekt <|-- RpBestemmelseRom
+  RpObjekt <|-- RpBestemmelseMidlByggAnlegg
+  RpBestemmelseMidlByggAnlegg --> RpBestemmelseRom : rom [0..1]
+  RpBestemmelseMidlByggAnlegg --> RpBestemmelseRegTerreng : regulertTerreng [0..*]
+  RpObjekt <|-- RpBestemmelseRegTerreng
+  RpObjekt <|-- RpRegulertH_yde
+  RpObjekt <|-- RpJuridiskPunkt
+  RpObjekt <|-- RpJuridiskLinje
+  RpObjekt <|-- RpP_skrift
+  RpP_skrift --> RpOmr_de : [0..1]
+  RpP_skrift --> RpArealform_lOmr_de : formål [0..1]
+  RpP_skrift --> RpB_ndleggingSone : båndlegging [0..1]
+  RpP_skrift --> RpHensynSone : [0]
+  RpP_skrift --> RpInfrastrukturSone : infrastruktur [0..1]
+  RpP_skrift --> RpAngittHensynSone : angittHensyn [0..1]
+  RpP_skrift --> RpSt_ySone : støy [0..1]
+  RpP_skrift --> RpFareSone : fare [0..1]
+  RpP_skrift --> RpGjennomf_ringSone : gjennomføring [0..1]
+  RpP_skrift --> RpDetaljeringSone : detaljering [0..1]
+  RpP_skrift --> RpSikringSone : sikring [0..1]
+  RpP_skrift --> RpBestemmelseOmr_de : bestemmelseOmråde [0..1]
+  RpP_skrift --> RpBestemmelseMidlByggAnlegg : midlByggAnlegg [0..1]
+  RpP_skrift --> RpRegulertH_yde : regulertHøyde [0..1]
+  RpP_skrift --> RpJuridiskPunkt : juridiskPunkt [0..1]
+  RpP_skrift --> RpJuridiskLinje : juridiskLinje [0..1]
+
+@enduml

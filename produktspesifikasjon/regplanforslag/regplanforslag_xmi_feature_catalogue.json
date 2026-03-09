@@ -1,0 +1,1944 @@
+[
+  {
+    "name": "FellesegenskaperKart",
+    "description": "abstrakt objekttype som bærer de egenskapene fra SOSI_Objekt i SOSI Del 1 som er anvendt på stedfesta objekttyper (kartobjekter) i datamodellen.\nI SOSI Del 1 er SOSI_Objekt en abstrakt objekttype som bærer sentrale egenskaper som er anbefalt for bruk i produktspesifikasjoner.",
+    "attributes": [
+      {
+        "name": "identifikasjon",
+        "type": "Identifikasjon",
+        "description": "unik identifikasjon av et dataobjekt.\n\nSystemegenskap som ikke skal kunne endres av brukerne",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "lokalId",
+            "type": "CharacterString",
+            "description": "lokal identifikator av et objekt\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
+            "cardinality": "1"
+          },
+          {
+            "name": "navnerom",
+            "type": "CharacterString",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt.\nNavnerom anbefales å være en http-URI og må være registrert i data.geonorge.no\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
+            "cardinality": "1"
+          },
+          {
+            "name": "versjonId",
+            "type": "CharacterString",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "DateTime",
+        "description": "tidspunkt for siste endring på dataobjektet.\n\nSystemegenskap som ikke skal kunne endres av brukerne",
+        "cardinality": "1"
+      },
+      {
+        "name": "førsteDigitaliseringsdato",
+        "type": "DateTime",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet",
+        "description": "beskrivelse av kvaliteten på stedfestingen",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "datafangstmetode",
+            "type": "Datafangstmetode",
+            "description": "metode for datafangst.\nEgenskapen beskriver datafangstmetode for grunnrisskoordinater (x,y)",
+            "cardinality": "1",
+            "valueDomain": {
+              "definition": "kodeliste som angir metode for datafangst.\nDatafangstmetoden beskriver hvordan selve vektordataene er posisjonert fra et datagrunnlag og ikke prosessen med å innhente det bakenforliggende datagrunnlaget.",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/datafangstmetode"
+            }
+          },
+          {
+            "name": "nøyaktighet",
+            "type": "Integer",
+            "description": "punktstandardavviket i grunnriss, oppgitt i cm, for punkter, samt tverravvik for linjer",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "opphav",
+        "type": "CharacterString",
+        "description": "referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  },
+  {
+    "name": "FellesegenskaperArealplan",
+    "description": "abstrakt objekttype som bærer de egenskapene fra SOSI_Objekt i SOSI Del 1 som er anvendt på objekttypen Arealplan",
+    "attributes": [
+      {
+        "name": "identifikasjon",
+        "type": "Identifikasjon",
+        "description": "unik identifikasjon av et dataobjekt.\nSystemegenskap som ikke skal kunne endres av brukerne, men som skal følge dataobjektet og identifisere det i hele dets levetid.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "lokalId",
+            "type": "CharacterString",
+            "description": "lokal identifikator av et objekt\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
+            "cardinality": "1"
+          },
+          {
+            "name": "navnerom",
+            "type": "CharacterString",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt.\nNavnerom anbefales å være en http-URI og må være registrert i data.geonorge.no\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
+            "cardinality": "1"
+          },
+          {
+            "name": "versjonId",
+            "type": "CharacterString",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "DateTime",
+        "description": "tidspunkt for siste endring av dataobjektet.\nSystemegenskap som ikke skal kunne endres av brukerne",
+        "cardinality": "1"
+      },
+      {
+        "name": "prosesshistorie",
+        "type": "CharacterString",
+        "description": "beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene",
+        "cardinality": "0..*"
+      },
+      {
+        "name": "informasjon",
+        "type": "CharacterString",
+        "description": "generell opplysning\n\nMerknad: mulighet til å legge inn utfyllende informasjon om objektet",
+        "cardinality": "0..*"
+      },
+      {
+        "name": "link",
+        "type": "CharacterString",
+        "description": "referanse til et informasjonselement, enten lokalt eller globalt",
+        "cardinality": "0..*"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    }
+  },
+  {
+    "name": "Arealplan",
+    "description": "toppobjekt for reguleringsplanen (pbl. §§ 12-1, 12-2 og 12-3).\nObjektet inneholder informasjon om planen som helhet og med referanser til planens planområder (RpOmråde)",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1, og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd).\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "kommunenummer",
+            "type": "Kommunenummer",
+            "description": "kode som viser til offisiell nummerering av kommuner\n\nMerknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre som også benytter 4 siffer.",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "definition": "ekstern kodeliste for kommunenummer.\nKoder med status Gyldig refererer til dagens kommuner, mens koder med status Ugått referer til utgåtte kommunenummer",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+            }
+          },
+          {
+            "name": "landkode",
+            "type": "Landkode",
+            "description": "administrativ enhet for statlig vedtatte planer, landkode = NO, anvendes kun av statlig vedtaksmyndighet",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "NO",
+                  "label": "Norge"
+                }
+              ],
+              "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+            }
+          },
+          {
+            "name": "planid",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon av en plan innen vedkommende administrative enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "plantype",
+        "type": "RpPlantype",
+        "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3)",
+        "cardinality": "1",
+        "valueDomain": {
+          "definition": "ekstern kodeliste for type reguleringsplan (pbl. §§ 12-2 og 12-3) ihht til gjeldende lov. Angir om planen er en områdeplan eller detaljplan.",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype"
+        }
+      },
+      {
+        "name": "plannavn",
+        "type": "CharacterString",
+        "description": "planens offisielle navn",
+        "cardinality": "1"
+      },
+      {
+        "name": "planstatus",
+        "type": "Planstatus",
+        "description": "reguleringsplanens rettsvirkning (pbl.  §§ 12-8 til 12-12, jf § 9-3)\nFor reguleringsplanforslag skal planstatus = Planforslag (2)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Planforslag",
+              "label": "forslag til arealplan er lagt frem for vedtaksmyndigheten (kommunen)"
+            }
+          ],
+          "definition": "koder for planens virkning (pbl. §§ 9-3, 9-4, og §§ 12-8 til 12-12)\nFor reguleringsplanforslag skal det angis at det er et planforslag"
+        }
+      },
+      {
+        "name": "omPlanbestemmelser",
+        "type": "OmPlanbestemmelser",
+        "description": "om planen har bestemmelser (pbl § 12-7), og hvordan disse i så fall er representert\n\nMerknad: Egenskapen er gitt nytt navn for at den ikke skal forveksles med forhold knyttet til digitale planbestemmelser.\nFor nye planer er bestemmelsene både på kart og som egen tekst (kode 4)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Planbestemmelser både kart og tekst",
+              "label": "Planbestemmelser både på kart og som egen tekst.  Dette gleder alltid for nye planer."
+            }
+          ],
+          "definition": "om planen har bestemmelser (pbl. § 12-7), og hvordan disse i så fall er representert.\n\nMerknad: Er gitt nytt navn for at den ikke skal forveksles med forhold knyttet til digitale planbestemmelser."
+        }
+      },
+      {
+        "name": "lovreferanse",
+        "type": "Lovreferanse",
+        "description": "referanse til lov som planen og bestemmelsene er hjemlet i.\nFor reguleringsplanforslag skal lovreferanse = pbl 2008 (6)",
+        "cardinality": "1",
+        "valueDomain": {
+          "definition": "ekstern kodeliste for gjeldende pbl.",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse"
+        }
+      },
+      {
+        "name": "lovreferanseBeskrivelse",
+        "type": "CharacterString",
+        "description": "tekstlig beskrivelse av hvilken lov planer er vedtatt etter.\n\nMerknad: Kan være utfyllende til egenskapen lovereferanse",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "versjonsdato",
+        "type": "DateTime",
+        "description": "datoen for denne versjonen av planforslaget (ref. versjonsnummer)",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "versjonsnummer",
+        "type": "CharacterString",
+        "description": "viser det innsendte planforslagets versjon\nKommunen stiller kriterier for når et planforslag skal gis ny versjon",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "alternativReferanse",
+        "type": "CharacterString",
+        "description": "gir anledning til å identifisere ulike planalternativ i en leveranse av planforslaget",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "forslagsstillerType",
+        "type": "ForslagsstillerType",
+        "description": "om forslagsstiller er privat eller offentlig\nBenyttes for å kunne skille arealplaner i prosess som skal fremmes etter prosessreglene for private planer (pbl. § 12.11) og planer som skal fremmes etter prosessreglene for offentlige planer",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "offentlig",
+              "label": "offentlig forslagsstiller.  Planen skal fremmes etter prosessreglene for offentlige planer (pbl. § 12-10)"
+            },
+            {
+              "value": "privat",
+              "label": "privat forslagsstiller.\nPlanen skal fremmes etter prosessreglene for private planer (pbl. § 12-11)"
+            }
+          ],
+          "definition": "koder for om forslagsstiller er privat eller offentlig.\n\nBenyttes for å kunne skille arealplaner i prosess som skal fremmes etter prosessreglene for private planer (pbl. § 12.11) og planer som skal fremmes etter prosessreglene for offentlige planer"
+        }
+      },
+      {
+        "name": "planhøring",
+        "type": "Planhøring",
+        "description": "egenskapssett for å holde rede på versoner og alternative planforslag som legges ut til høring og offentlig ettersyn (pbl § 12-9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "høringsversjon",
+            "type": "Integer",
+            "description": "planforslaget kan legges ut til høring og offentlig ettersyn flere ganger. Hver publisering gis en versjonsangivelse (f.eks. en dato og/eller et serienummer)",
+            "cardinality": "1"
+          },
+          {
+            "name": "høringsalternativ",
+            "type": "CharacterString",
+            "description": "planforslaget kan legges ut til høring og offentlig ettersyn med to eller flere planalternativer",
+            "cardinality": "0..1"
+          },
+          {
+            "name": "høringsstart",
+            "type": "Date",
+            "description": "dato for når høring og offentlig ettersyn starter",
+            "cardinality": "0..1"
+          },
+          {
+            "name": "høringsslutt",
+            "type": "Date",
+            "description": "dato for når høring og offentlig ettersyn slutter",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "FellesegenskaperArealplan"
+      ],
+      "associations": [
+        {
+          "target": "RpOmråde",
+          "role": "rpOmråde",
+          "cardinality": "1..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpGrense",
+    "description": "avgrensingslinje for planomåde (RpOmråde) i reguleringsplan (pbl. §§ 12-1, 12-2 og 12-3)",
+    "attributes": [
+      {
+        "name": "grense",
+        "type": "GM_Curve",
+        "description": "avgrensingslinje",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpOmråde",
+    "description": "planområde for reguleringsplan (områderegulering eller detaljregulering) (pbl. §§ 12-1, 12-2 og 12-3)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "heleid flategeometri",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpRegulertHøyde",
+          "role": "regulertHøyde",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpBestemmelseMidlByggAnlegg",
+          "role": "midlByggAnlegg",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpDetaljeringSone",
+          "role": "detaljering",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpJuridiskPunkt",
+          "role": "juridiskPunkt",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpArealformålOmråde",
+          "role": "formål",
+          "cardinality": "1..*"
+        },
+        {
+          "target": "RpInfrastrukturSone",
+          "role": "infrastruktur",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpGjennomføringSone",
+          "role": "gjennomføring",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpFareSone",
+          "role": "fare",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpBestemmelseOmråde",
+          "role": "bestemmelseOmråde",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpBåndleggingSone",
+          "role": "båndlegging",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpSikringSone",
+          "role": "sikring",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpStøySone",
+          "role": "støy",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpHensynSone",
+          "cardinality": "0"
+        },
+        {
+          "target": "RpAngittHensynSone",
+          "role": "angittHensyn",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpJuridiskLinje",
+          "role": "juridiskLinje",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpObjekt",
+    "description": "abstrakt objekttype som omfatter alle typer kartobjekter i en reguleringsplan.\nObjekttypen er utstyrt med egenskaper som identifiserer hviken arealplan og hvilket kartlag det enkelte kartobjekt tilhører",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "landsdekkende entydig og unik identifikasjon for en arealplan.\nI forvaltningsløsnignene kan den brukes som koblingsnøkkel mellom kartobjekene og den arealplanen de tilhører.",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "kommunenummer",
+            "type": "Kommunenummer",
+            "description": "kode som viser til offisiell nummerering av kommuner\n\nMerknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre som også benytter 4 siffer.",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "definition": "ekstern kodeliste for kommunenummer.\nKoder med status Gyldig refererer til dagens kommuner, mens koder med status Ugått referer til utgåtte kommunenummer",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+            }
+          },
+          {
+            "name": "landkode",
+            "type": "Landkode",
+            "description": "administrativ enhet for statlig vedtatte planer, landkode = NO, anvendes kun av statlig vedtaksmyndighet",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "NO",
+                  "label": "Norge"
+                }
+              ],
+              "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+            }
+          },
+          {
+            "name": "planid",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon av en plan innen vedkommende administrative enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenheten i forhold til jordoverflaten (pbl. § 19-1 sjette ledd, § 20-1 andre og femte ledd og § 22 og § 28-2) for planområdet med tilhørende kartobjekt",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Under grunnen (tunnel)",
+              "label": "Under bakken, f.eks. tunnel."
+            },
+            {
+              "value": "På grunnen/vannoverflate",
+              "label": "På bakken eller på vannoverflata"
+            },
+            {
+              "value": "Over grunnen (bru)",
+              "label": "Over bakken, f.eks. bru."
+            },
+            {
+              "value": "På bunnen (vann/sjø)",
+              "label": "På bunnen av sjø eller innsjø"
+            },
+            {
+              "value": "I vannsøylen",
+              "label": "I vannsøylen"
+            }
+          ],
+          "definition": "kodeliste for planområdets beliggenhet i forhold til jordoverflaten (pbl. § 19-1 sjette ledd, § 20-1 andre og femte ledd og § 22 og § 28-2)"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon av et lag i et vertikalnivå.\n\nNår en plan har flere lag i samme vertikalnivå, brukes denne egenskapen for å identifisere hvilket lag kartobjektet tilhører",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifiserer vertikallag innen samme vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifiering av høydenivået for vertikallaget",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "FellesegenskaperKart"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpFormålGrense",
+    "description": "avgrensingsobjekt for formålsområde (RpArealformålOmråde)\nAvgrensingslinja skal inneholde informasjon om kvalitet, slik at saksbehandler kan be om tiltak der kvaliteten ikke er tilfredsstillende.",
+    "attributes": [
+      {
+        "name": "grense",
+        "type": "GM_Curve",
+        "description": "avgrensingslinje",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpHandlingOmråde",
+    "description": "område som konstruksjonen/tiltaket må holde seg innenfor (kart- og planforskriften vedlegg I bokstav c nr. 4 – formål og bestemmelser fastsatt med linjer i reguleringsplan).\n\nMerknad: RpHandlingOmråde har samme betydning som byggegrense og anvendes ved fremstilling av planen i 2D.\nDersom det også er angitt et 3D-rom som avgrenser tiltaket vertikalt, er dette gitt ved et tilhørende RpHandlingRom. Det må da være samsvar mellom de to geometriene ved at flategeometrien er fotavtrykket (grunnrissprojeksjonen) av romgeometrien.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_Surface",
+        "description": "områdets flategeometri",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHandlingRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpArealformålOmråde",
+    "description": "område med angitt arealformål i reguleringsplan (pbl. § 12-5)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "heleid flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "arealformål",
+        "type": "RpArealformål",
+        "description": "angivelse av arealformål i reguleringsplan (pbl. § 12-5)",
+        "cardinality": "1",
+        "valueDomain": {
+          "definition": "ekstern kodeliste for arealformål i reguleringsplan (pbl. § 12-5)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rparealformål"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "unik forkortelse for navn på formålsflater i områderegulering og detaljregulering (pbl. § 12-5 første ledd, pbl. § 12-7 nr. 4, samt TEK17 § 5-6 og kap. 8).\nFeltnavn skal være i samsvar med arealformål og eierform, der arealformålet angis i henhold til kodeliste fra KDD.\nFeltnavn skal skrives ut på plankartet.\nFeltnavn brukes som koblingsnøkkel mellom plankartet og planbestemmelsene.",
+        "cardinality": "1"
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "beskrivelse kan benyttes der loven gir anledning til detaljering, for eks, \"andre anlegg\", men der lov/forskrift ikke definerer detaljeringen i form av spesifikke arealformål.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "eierform",
+        "type": "EierformType",
+        "description": "planbestemmelse om eierform (pbl. § 12-7 nr. 14).\nEierform angir hvilke arealer det offentlige må sikre seg eiendoms- eller bruksrett til for å få gjennomført planen. Tilsvarende der eierne av bestemte angitte eiendommer er forutsatt å disponere et areal i fellesskap.\nEierform skal alltid angis på plankartet når det fra planmyndighetens side er forutsatt at det offentlige skal være eier av grunnen eller ha eksklusiv rett til å disponere arealet, bygningen, konstruksjonen eller anlegget på eiendommen, eller det er det offentlige som skal råde over virksomhet som skal utøves på eiendommen/arealet",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "offentlig formål",
+              "label": "det offentlige skal være eier av grunnen eller ha eksklusiv rett til å disponere arealet, bygningen, konstruksjonen eller anlegget på eiendommen, eller det offentlige skal råde over virksomhetenom skal utøves på eiendommen/arealet"
+            },
+            {
+              "value": "felles",
+              "label": "eierne av bestemt angitte eiendommer skal disponere arealet i felleskap"
+            },
+            {
+              "value": "annen eierform",
+              "label": "angir at det ikke er bestemt offentlig eller felles eierform.  Brukes altså som default verdi for arealer som ikke skal ha kodeverdi 1 eller 2. Koden er hverken hjemlet i pbl. § 11-10 nr. 3 eller § 12-7 nr. 14."
+            }
+          ],
+          "definition": "kodeliste for eierform."
+        }
+      },
+      {
+        "name": "utnytting",
+        "type": "Utnytting",
+        "description": "fastsatt grad av utnytting (pbl. § 12-7 nr. 5, samt TEK kap. 5).\nBenyttes for å regulere bygningers volum og totale areal, sett i forhold til behovet for uteoppholdsareal, belastning på infrastruktur og forholdet til omgivelsene.\nDersom utnytting er angitt med flere forekomster skal det referers til ulik utnyttingstype i hver av forekomstene.\nI områder for kjøpesentre og forretninger skal bruksareal (BRA) alltid brukes til å fastsette grad av utnytting  (TEK § 5-1, 2. ledd). BRA gir oversikt over det samlede arealet for alle plan i en bygning. BRA er derfor hensiktsmessig å bruke i områder for kjøpesentre og forretninger hvor man ønsker å styre størrelsen på bebyggelsen av hensyn til belastningen på omgivelsene.",
+        "cardinality": "0..*",
+        "attributes": [
+          {
+            "name": "utnyttingstype",
+            "type": "Utnyttingstype",
+            "description": "type grad av utnytting (pbl. § 12-7 første ledd nr 5 og TEK17 kap. 5)",
+            "cardinality": "1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "Ikke tillatt å bebygge",
+                  "label": "Ikke tillatt å bebygge"
+                },
+                {
+                  "value": "Ikke tillatt med ytterligere bebyggelse",
+                  "label": "Ikke tillatt med ytterligere bebyggelse"
+                },
+                {
+                  "value": "BYA",
+                  "label": "Bebygd areal i kvm etter TEK"
+                },
+                {
+                  "value": "%-BYA",
+                  "label": "Bebygd areal i prosent etter TEK"
+                },
+                {
+                  "value": "BRA",
+                  "label": "Bruksareal i kvm etter TEK"
+                },
+                {
+                  "value": "%-BRA",
+                  "label": "Bruksareal i prosent etter TEK"
+                }
+              ],
+              "definition": "kodeliste for type utnyttingsgrad (pbl. §12-7 første ledd nr 5 og TEK17 kap. 5)"
+            }
+          },
+          {
+            "name": "utnyttingstall",
+            "type": "Integer",
+            "description": "tallverdi for grad av utnytting (pbl. §12-7 første ledd nr 5 og TEK17 kap. 5)\nBetydningen av tallet følger av utnyttingstypen",
+            "cardinality": "0..1"
+          },
+          {
+            "name": "utnyttingstall_minimum",
+            "type": "Integer",
+            "description": "tallverdi for minste utnyttingsgrad (pbl. §12-7 første ledd nr 5 og TEK17 kap 5 )",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "uteoppholdsareal",
+        "type": "Integer",
+        "description": "fastsatt minste uteoppholdsareal (MUA).\nBenyttes for å sikre tilstrekkelige og brukbare arealer til uteopphold med god kvalitet (pbl. § 28-7 tredje ledd og forskrift TEK17 § 5-6)",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "avkjørselsbestemmelse",
+        "type": "Avkjørselsbestemmelse",
+        "description": "planbestemmelse om avkjørsel (pbl. § 12-7 nr. 7 og TEK § 8-8)\n\nMerknad:  Angir om avkjørsel til formålsområde tillates eller ikke tillates, eller om det i plan og/eller bestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområdet det er tillatt å passere",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Avkjørsel tillatt",
+              "label": "Avkjørsel er tillatt"
+            },
+            {
+              "value": "Avkjørsel ikke tillatt",
+              "label": "Avkjørsel er ikke tillatt"
+            }
+          ],
+          "definition": "kodeliste for planbestemmelse om avkjørsel (pbl. §§ 25 og 26 første ledd).\n\nMerknad:\nAngir om avkjørsel til formålsområde tillates eller ikke tillates, eller om det i plan / bestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområde det er tillatt."
+        }
+      },
+      {
+        "name": "byggverkbestemmelse",
+        "type": "Byggverkbestemmelse",
+        "description": "henvisning til planbestemmelse om bygningers plassering, utforming mv. (pbl. § 12-7 nr. 1 og 2, samt TEK kap. 7 og § 8-3)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Fastsatt plassering",
+              "label": "Fastsatt plassering av bygning"
+            },
+            {
+              "value": "Fastsatt høyde",
+              "label": "Fastsatt høyde av bygning"
+            },
+            {
+              "value": "Fastsatt plassering/høyde",
+              "label": "Fastsatt plassering/høyde av bygning"
+            },
+            {
+              "value": "Fastsatt møneretning",
+              "label": "Fastsatt møneretning av bygning"
+            },
+            {
+              "value": "Fastsatt plassering/møneretning",
+              "label": "Fastsatt plassering/møneretning av bygning"
+            },
+            {
+              "value": "Fastsatt plassering/høyde/møneretning",
+              "label": "Fastsatt plassering/høyde/møneretning av bygning"
+            },
+            {
+              "value": "Fastsatt utforming",
+              "label": "Fastsatt utforming av bygning"
+            }
+          ],
+          "definition": "kodeliste for henvisning til planbestemmelse om bygningers plassering, utforming mv. ( pbl. §§ 11-10 nr. 1 og 12-7 nr. 1 og 2)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpFormålGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpHandlingOmråde",
+          "role": "handlingsområde",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpHandlingRom",
+    "description": "handlingsrom i 3D for RpHandlingOmråde.\nKonstruksjonen/tiltaket må holde seg innenfor handlingrommet, i henhold til de tilhørende planbestemmelsene",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "lukket romgeometri i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpBåndleggingSone",
+    "description": "hensynssone for båndlegging i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)",
+    "attributes": [
+      {
+        "name": "båndlegging",
+        "type": "RpBåndleggingSoneType",
+        "description": "kode for type båndlegging i hensynssone for båndlegging (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Båndlegging for regulering etter pbl.",
+              "label": "Båndlegging for regulering etter plan- og bygningsloven"
+            },
+            {
+              "value": "Båndlegging etter naturvernloven",
+              "label": "Båndlegging etter lov om naturvern"
+            },
+            {
+              "value": "Båndlegging etter kulturminneloven",
+              "label": "Båndlegging etter lov om kulturminner"
+            },
+            {
+              "value": "Båndlegging etter markaloven",
+              "label": "Båndlegging etter lov om naturområder i Oslo og nærliggende kommuner (markaloven)"
+            },
+            {
+              "value": "Båndlegging etter andre lover",
+              "label": "Båndlegging etter andre lover"
+            },
+            {
+              "value": "Båndlegging etter vegloven",
+              "label": "Båndlegging i henhold til avkjøringsklasser etter vegloven"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type båndlegging i hensynssone for båndlegging (pbl. § 11-8 tredje ledd bokstav d)"
+        }
+      },
+      {
+        "name": "båndlagtFremTil",
+        "type": "Date",
+        "description": "planbestemmelsen om midlertidig båndlagt i påvente av vedtak etter pbl., eller særlov, med angivelse av hvilke rådighetsbegrensinger som gjelder inntil det er utarbeidet et nytt forvaltningsgrunnlag for arealet (pbl. § 11-8 tredje ledd bokstav d)",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpHensynSone",
+    "description": "områder som angir en hensynssone i reguleringsplan (pbl. § 12-6, jf. § 11-8)\n\nMerknad: RpHensynSone er en supertype som ikke skal realiseres. Den er en generalisering som er felles for alle typer hensynssoner i modellen.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "områdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "unikt navn som gir entydig identifikasjon av hensynssone i reguleringplan (pbl. § 12-6, jf. § 11-8)",
+        "cardinality": "1"
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "beskrivelse kan benyttes der loven gir anledning til detaljering, f.eks. \"andre anlegg\", men der lov/forskrift ikke definerer detaljeringen i form av spesifikke arealformål",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpInfrastrukturSone",
+    "description": "hensynssone for særlige krav til infrastruktur i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)",
+    "attributes": [
+      {
+        "name": "infrastruktur",
+        "type": "RpInfrastrukturSoneType",
+        "description": "kode for særlige krav til infrastruktur (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Krav vedrørende infrastruktur",
+              "label": "Krav vedrørende infrastruktur ( pbl §11-8, bokstav b)"
+            },
+            {
+              "value": "Rekkefølgekrav infrastruktur",
+              "label": "Rekkefølgekrav til teknisk infrastruktur (pbl § 11-9, nr 4 )"
+            },
+            {
+              "value": "Rekkefølgekrav samfunnservice",
+              "label": "Rekkefølgekrav til samfunnservice (pbl § 11-9, nr 4 )"
+            },
+            {
+              "value": "Rekkefølgekrav grønnstruktur",
+              "label": "Rekkefølgekrav til grønnstruktur (pbl § 11-9, nr 4 )"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type infrastrukturkrav i hensynsone for infrastruktur (pbl. § 11-8, tredje ledd bokstav b,  § 11-9, nr 4 og § 12A-13)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpAngittHensynSone",
+    "description": "hensynssone for nærmere angitt hensyn i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav c)",
+    "attributes": [
+      {
+        "name": "angittHensyn",
+        "type": "RpAngittHensynSoneType",
+        "description": "kode for type angitt hensyn i hensynssone for nærmere angitt hensyn (pbl. §12-6, jf. § 11-8 tredje ledd bokstav c)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Hensyn landbruk",
+              "label": "Hensyn landbruk"
+            },
+            {
+              "value": "Hensyn reindrift",
+              "label": "Hensyn reindrift"
+            },
+            {
+              "value": "Hensyn friluftsliv",
+              "label": "Hensyn friluftsliv"
+            },
+            {
+              "value": "Hensyn grønnstruktur",
+              "label": "Hensyn grønnstruktur"
+            },
+            {
+              "value": "Hensyn landskap",
+              "label": "Hensyn landskap"
+            },
+            {
+              "value": "Bevaring naturmiljø",
+              "label": "Bevaring naturmiljø"
+            },
+            {
+              "value": "Bevaring kulturmiljø",
+              "label": "Bevaring kulturmiljø"
+            },
+            {
+              "value": "Randområder til nasjonalpark/landskapsvernområde",
+              "label": "Sikring av randområder til nasjonalpark eller landskapsvernområde"
+            },
+            {
+              "value": "Sikring av mineralressurser",
+              "label": "sikring av mineralressurser"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type angitt hensyn i hensynssone for nærmere angitt hensyn  (11-8 tredje ledd bokstav c)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpStøySone",
+    "description": "hensynssone for støy i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "støy",
+        "type": "RpStøySoneType",
+        "description": "kode for type støy i hensynssone for støy (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Rød sone",
+              "label": "Rød sone iht. T-1442"
+            },
+            {
+              "value": "Gul sone",
+              "label": "Gul sone iht. T-1442"
+            },
+            {
+              "value": "Grønn sone",
+              "label": "Grønn sone iht. T-1442"
+            },
+            {
+              "value": "Andre støysoner",
+              "label": "Andre støysoner"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type støy i hensynsone for støy (pbl. § 11-8, tredje ledd bokstav a)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpFareSone",
+    "description": "hensynssone for fare i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "fare",
+        "type": "RpFareSoneType",
+        "description": "kode for type fare i hensynssone for fare (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Ras- og skredfare",
+              "label": "Ras- og skredfare"
+            },
+            {
+              "value": "Flomfare",
+              "label": "Flomfare"
+            },
+            {
+              "value": "Radon",
+              "label": "Radonfare"
+            },
+            {
+              "value": "Brann-/eksplosjonsfare",
+              "label": "Brann- og eksplosjonsfare"
+            },
+            {
+              "value": "Skytebane",
+              "label": "Skytebane"
+            },
+            {
+              "value": "Høyspenningsanlegg (inkl høyspentkabler)",
+              "label": "Høyspenningsanlegg, inkl høyspentkabler"
+            },
+            {
+              "value": "Sone for militær virksomhet",
+              "label": "Sone for militær virksomhet"
+            },
+            {
+              "value": "Annen fare",
+              "label": "Annen fare"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type fare i hensynssone for fare (pbl. § 11-8, tredje ledd bokstav a)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpGjennomføringSone",
+    "description": "hensynssone med bestemmelse om at flere eiendommer skal undergis felles planlegging med bruk av særskilte gjennomføringsvirkemidler (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav e andre ledd)",
+    "attributes": [
+      {
+        "name": "gjennomføring",
+        "type": "RpGjennomføringSoneType",
+        "description": "kode for type særskilte gjennomføringsvirkemidler",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Krav om felles planlegging",
+              "label": "krav om felles planlegging for flere eiendommer, herunder med særlige samarbeids- eller eierformer"
+            },
+            {
+              "value": "Omforming",
+              "label": "krav om målrettet og særskilt områdevis planlegging og gjennomføring for omforming"
+            },
+            {
+              "value": "Krav om grunneierfinansiering av infrastruktur",
+              "label": "Krav om grunneierfinansiering av infrastruktur etter pbl. § 12 A-1"
+            },
+            {
+              "value": "Krav om flytting av infrastruktur",
+              "label": "Krav om flytting av infrastruktur for å frigjøre areal til utbyggingsformål etter § 12 A-13"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type særskilte gjennomføringsvirkemidler i gjennomføringssone (pbl. § 11-8 tredje ledd bokstav e andre ledd)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpDetaljeringSone",
+    "description": "hensynssone for videreføring av reguleringsplan (pbl. § 12-6, jf. §11-8 tredje ledd bokstav f).\nKan benyttes i områderegulering for å angi videreføring av detaljregulering. Skal ikke anvendes i detaljregulering.\n\nMerknad: Hensynssonen skal ikke kunne fremstilles i 3D.",
+    "attributes": [
+      {
+        "name": "detaljering",
+        "type": "RpDetaljeringSoneType",
+        "description": "kode som angir videreføring av gjeldende reguleringsplan (pbl. § 12-6, jf. §11-8 tredje ledd bokstav f)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Reguleringsplan skal fortsatt gjelde",
+              "label": "eksisterende reguleringsplan skal fortsatt gjelde"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type detaljering i detaljeringssone - videreføring av gjeldende reguleringsplan (pbl. § 11-8 tredje ledd bokstav f)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpSikringSone",
+    "description": "hensynssone for sikring i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "sikring",
+        "type": "RpSikringSoneType",
+        "description": "kode for type sikring i hensynssone for sikring (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Nedslagsfelt drikkevann",
+              "label": "sikring av nedslagsfelt for drikkevann, område, over og under bakken, som vannet i råvannskilden kommer fra. Drikkevannsforskriften bruker begrepet \"vanntilsigsområde\""
+            },
+            {
+              "value": "Område for grunnvannsforsyning",
+              "label": "sikring av vannforekomst i grunnen, fra sand og grusressurser samt vannførende berggrunn"
+            },
+            {
+              "value": "Byggeforbud rundt veg, bane og flyplass",
+              "label": "sikkerhetssone langs veg, bane og flyplass av hensyn til fare og trafikksikkerhet"
+            },
+            {
+              "value": "Andre sikringssoner",
+              "label": "sikkerhetssone langs andre formål"
+            },
+            {
+              "value": "Frisikt",
+              "label": "frisiktsone ihht vegloven"
+            }
+          ],
+          "definition": "uttømmende kodeliste for type sikring i hensynsone for sikring i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpHensynSone"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpHensynRom",
+    "description": "hensynsrom i 3D for RpHensynSone\nHensynsrommet tilhører alltid en hensynssone, som er en av subtypene til den abstrakte supertypen RpHensynSone, dvs. en av disse: RpStøySone, RpSikringSone, RpFareSone, RpBåndleggingSone, RpAngittHensynSone, RpInfrastrukturSone eller RpGjennomføringSone.",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "lukket romgeometri i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpBestemmelseOmråde",
+    "description": "område for stedfesting av bestemmelser som ikke kan knyttes til et formålsområde eller en hensynsone (pbl. § 12-7 nr. 1-14)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "områdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "bestemmelseHjemmel",
+        "type": "RpBestemmelseHjemmel",
+        "description": "Henvisning til hjemmel ihht. pbl. § 12-7\nDet kan unntaksvis angis flere hjemler, der det er nødvendig for å unngå flere geometrisk identiske områder",
+        "cardinality": "1..*",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "utforming",
+              "label": "Pbl. § 12-7 nr. 1 om utforming, herunder estetiske krav, og bruk av arealer, bygninger og anlegg i planområdet"
+            },
+            {
+              "value": "vilkår for bruk av arealer, bygninger og anlegg",
+              "label": "Pbl. § 12-7 nr. 2 om vilkår for bruk av arealer, bygninger og anlegg i planområdet, eller forbud mot former for bruk, herunder byggegrenser, for å fremme eller sikre formålet med planen, avveie interesser og ivareta ulike hensyn i eller av hensyn til forhold utenfor planområdet"
+            },
+            {
+              "value": "grenseverdier/krav til forurensning og miljøkvalitet",
+              "label": "Pbl. § 12-7 nr. 3 om grenseverdier for tillatt forurensning og andre krav til miljøkvalitet i planområdet, samt tiltak og krav til ny og pågående virksomhet i eller av hensyn til forhold utenfor planområdet for å forebygge eller begrense forurensning"
+            },
+            {
+              "value": "funksjons- og kvalitetskrav til bygninger, anlegg og utearealer",
+              "label": "Pbl. § 12-7 nr. 4 om funksjons- og kvalitetskrav til bygninger, anlegg og utearealer, herunder krav for å sikre hensynet til helse, miljø, sikkerhet, universell utforming og barns særlige behov for leke- og uteoppholdsareal"
+            },
+            {
+              "value": "antall boliger, boligstørrelse, tilgjengelighet, mm",
+              "label": "Pbl. § 12-7 nr. 5 om antallet boliger i et område, største og minste boligstørrelse, og nærmere krav til tilgjengelighet og boligens utforming der det er hensiktsmessig for spesielle behov"
+            },
+            {
+              "value": "sikre verneverdier i bygninger, andre kulturminner og kulturmiljøer",
+              "label": "Pbl § 12-7 nr. 6 om bestemmelser for å sikre verneverdier i bygninger, andre kulturminner, og kulturmiljøer, herunder vern av fasade, materialbruk og interiør, samt sikre naturtyper og annen verdifull natur"
+            },
+            {
+              "value": "trafikkregulerende tiltak og parkeringsbestemmelser",
+              "label": "Pbl. § 12-7 nr. 7 om trafikkregulerende tiltak og parkeringsbestemmelser for bil og sykkelparkering, herunder øvre og nedre grense for parkeringsdekning"
+            },
+            {
+              "value": "krav om tilrettelegging for vannbåren varme",
+              "label": "Pbl. § 12-7 nr. 8 om krav om tilrettelegging for forsyning av vannbåren varme til ny bebyggelse, og at det er tilknytningsplikt etter § 27-5"
+            },
+            {
+              "value": "retningslinjer for særlige drifts- og skjøtselstiltak",
+              "label": "Pbl. § 12-7 nr. 9 om retningslinjer for særlige drifts- og skjøtselstiltak innenfor arealformålene nr. 3, 5 og 6 i § 12-5"
+            },
+            {
+              "value": "krav om særskilt rekkefølge for gjennomføring av tiltak",
+              "label": "Pbl. § 12-7 nr. 10 om krav om særskilt rekkefølge for gjennomføring av tiltak etter planen, og at utbygging av et område ikke kan finne sted før tekniske anlegg og samfunnstjenester som energiforsyning, transport og vegnett, helse- og sosialtjenester, helse- og omsorgstjenester, barnehager, friområder, skoler mv. er tilstrekkelig etablert"
+            },
+            {
+              "value": "krav om detaljregulering",
+              "label": "Pbl. § 12-7 nr. 11 om krav om detaljregulering for deler av planområdet eller bestemte typer av tiltak, og retningslinjer for slik plan"
+            },
+            {
+              "value": "krav om nærmere undersøkelser, overvåking og klargjøring av virkninger",
+              "label": "Pbl. § 12-7 nr. 12 om krav om nærmere undersøkelser før gjennomføring av planen, samt undersøkelser med sikte på å overvåke og klargjøre virkninger for miljø, helse, sikkerhet, tilgjengelighet for alle, og andre samfunnsinteresser, ved gjennomføring av planen og enkelttiltak i denne"
+            },
+            {
+              "value": "krav om fordeling av planskapt netto verdiøkning",
+              "label": "Pbl. § 12-7 nr. 13 om krav om fordeling av planskapt netto verdiøkning ved ulike felles tiltak innenfor en nærmere bestemt del av planområdet i henhold til jordskifteloven § 3-30"
+            },
+            {
+              "value": "hvilke arealer som skal være til offentlige formål eller fellesareal",
+              "label": "Pbl. § 12-7 nr. 14 om hvilke arealer som skal være til offentlige formål eller fellesareal"
+            }
+          ],
+          "definition": "liste over bestemmelser det er anledning til å gi i henhold til pbl. § 12-7"
+        }
+      },
+      {
+        "name": "bestemmelseOmrådeNavn",
+        "type": "CharacterString",
+        "description": "unikt navn på bestemmelseOmråde\nNavnet skal være på formen #<løpenummer>",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpBestemmelseRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpBestemmelseRegTerreng",
+          "role": "regulertTerreng",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpBestemmelseRom",
+    "description": "bestemmelserom i 3D for RpBestemmelseOmråde",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "lukket romgeometri i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpBestemmelseMidlByggAnlegg",
+    "description": "bestemmelsesområde for midlertidig bygge- og anlegg, jfr. pbl $ 12-7 nr. 1.\n\nMerknad:\nDette er et bestemmelsesområde, men av hensyn til å kunne forvalte området uavhengig av resten av planen, håndteres det som en egen objekttype.\nHjemmel for bruk av areal til ulike formål over tid er pbl. § 12-7 nr. 1 om bruk av arealer. I planens bestemmelser skal det klart angis hvilken hendelse eller hvilket tidspunkt det midlertidige bygge- og anleggsområdet opphører. Når det midlertidige bygge- og anleggsområdet er opphørt, skal det ikke lenger inngå i planen.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "områdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "bestemmelseOmrådeNavn",
+        "type": "CharacterString",
+        "description": "unikt navn på midlertidig bygg- og anleggsområde",
+        "cardinality": "1"
+      },
+      {
+        "name": "gyldigTilDato",
+        "type": "Date",
+        "description": "utløpsdato for bestemmelseområdet. Etter denne skal det midlertidige bestemmelseområdet fjernes.",
+        "cardinality": "1"
+      },
+      {
+        "name": "avgjørelsesdato",
+        "type": "Date",
+        "description": "dato for vedtak/avgjørelse av enkeltvedtak",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "saksnummer",
+        "type": "Saksnummer",
+        "description": "entydig nummer for enkeltsaker og enkeltvedtak",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "saksår",
+            "type": "Integer",
+            "description": "Årstallet saken ble initiert",
+            "cardinality": "1"
+          },
+          {
+            "name": "sakssekvensnummer",
+            "type": "Integer",
+            "description": "løpenummer for saken innenfor året.\n\nNB! attributtnavnet forandret fra sekvensnummer til sakssekvensnummer desember 2011, for å tilpasses NOARK 5.",
+            "cardinality": "1"
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpBestemmelseRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpBestemmelseRegTerreng",
+          "role": "regulertTerreng",
+          "cardinality": "0..*"
+        }
+      ]
+    }
+  },
+  {
+    "name": "RpBestemmelseRegTerreng",
+    "description": "regulert terrengoverflate slik det fremgår av planen.\n\nMerknad: Det regulerte terrenget er å betrakte som en bestemmelse som må knyttes til et RpBestemmelseOmråde",
+    "attributes": [
+      {
+        "name": "overflate",
+        "type": "GM_Surface",
+        "description": "angivelse av terrenget slik det skal være når tiltaket er gjennomført eller slik det maksimalt/minimalt kan utnyttes.",
+        "cardinality": "1"
+      },
+      {
+        "name": "overflateType",
+        "type": "RegulertOverflateType",
+        "description": "hvilke føringer den gitte overflaten setter for tillatt endring av terrenget",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "planlagt",
+              "label": "overflate som angir terrenget slik det skal ferdigstilles"
+            },
+            {
+              "value": "høyeste",
+              "label": "overflate som angir maksimum høyde, dvs maksimal tillatt oppfylling på terrenget"
+            },
+            {
+              "value": "laveste",
+              "label": "overflate som angir minimum høyde, dvs maksimal tillatt utgravning av terrenget"
+            }
+          ],
+          "definition": "hvilke føringer den gitte overflaten setter for tillatt endring av terrenget"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpRegulertHøyde",
+    "description": "linje med bestemmelse om regulert høyde (bestemmelse om utforming illustrert på kart, pbl. § 12-7 nr. 1)",
+    "attributes": [
+      {
+        "name": "linjeforløp",
+        "type": "GM_Curve",
+        "description": "kurvegeometri som bestemmer linjas forløp på kartet",
+        "cardinality": "1"
+      },
+      {
+        "name": "høydeFraPlanbestemmelse",
+        "type": "HøydeFraPlanbestemmelse",
+        "description": "regulert høyde gitt i planbestemmelser (bestemmelse om utforming illustrert på kart, pbl. § 12-7 nr. 1)",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "regulertHøyde",
+            "type": "Real",
+            "description": "tall for kotehøyde eller høyde over terreng ved bestemmelse om regulert høyde (bestemmelse om utforming illustrert på kart, pbl. § 12-7 nr. 1. )",
+            "cardinality": "1"
+          },
+          {
+            "name": "typeHøyde",
+            "type": "TypeHøyde",
+            "description": "kode som angir hva planbestemmelsen regulerer høyden av",
+            "cardinality": "1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "gesimshøyde",
+                  "label": "høyde til skjæringen mellom ytterveggens ytre flate og takflaten. Der taket er forsynt med et takoppbygg eller parapet som stikker mer enn 0,3 m opp over takflaten, regnes høyden til toppen av takoppbygget/parapetet. Måles i forhold til ferdig planert terrengs gjennomsnittsnivå rundt bygningen (TEK § 6-2)"
+                },
+                {
+                  "value": "mønehøyde",
+                  "label": "høyde til skjæringen mellom to skrå takflater. Måles i forhold til ferdig planert terrengs gjennomsnittsnivå rundt bygningen  (TEK § 6-2)"
+                },
+                {
+                  "value": "terrenghøyde",
+                  "label": "terrengets høyde"
+                },
+                {
+                  "value": "planeringshøyde",
+                  "label": "høyden av ferdig planert terreng"
+                }
+              ],
+              "definition": "kodeliste for å spesifisere hva slags høyde som er regulert"
+            }
+          },
+          {
+            "name": "høydereferansesystem",
+            "type": "Høydereferansesystem",
+            "description": "referansesystem som høydeverdiene refererer til. Gjeldende høydereferansesystem i Norge er NN2000",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "NN2000",
+                  "label": "Norsk Null av 2000.\nNytt felles nordisk vertikalt datum, basert på Normaal Amsterdals Peil."
+                }
+              ],
+              "definition": "referanseflate som er utgangspunktet for høyde. Det skal alltid brukes NN2000 for reguleringplanforslag."
+            }
+          },
+          {
+            "name": "terrengreferanse",
+            "type": "Terrengreferanse",
+            "description": "type terrengoverflate som er utgangspunkt for å angi høyde over terreng\n\nKan bare brukes for gesimshøyde og mønehøyde",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "value": "ferdigPlanertTerreng",
+                  "label": "gjennomsnittlig nivå av ferdig planert terreng"
+                },
+                {
+                  "value": "gatenivå",
+                  "label": "gatas gjennomsnittsnivå"
+                },
+                {
+                  "value": "eksistrendeTerreng",
+                  "label": "gjennomsnittlig nivå av terreng som ikke er mekanisk behandlet"
+                }
+              ],
+              "definition": "kodeliste som angir type terrengoverflate som er utgangspunkt for å angi bygningers høyde"
+            }
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpJuridiskPunkt",
+    "description": "punkt for juridisk bindende tilleggsinformasjon (pbl. §§ 12-2, 12-3, 12-5, og 12-7)",
+    "attributes": [
+      {
+        "name": "posisjon",
+        "type": "GM_Point",
+        "description": "punkt for stedfesting av objektet",
+        "cardinality": "1"
+      },
+      {
+        "name": "juridiskPunkttype",
+        "type": "RpJuridiskPunktType",
+        "description": "kode for type juridisk punkt i reguleringsplan, jf. pbl. kap. 12",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Veistengning/fysisk kjøresperre",
+              "label": "Regulert vegstenging"
+            },
+            {
+              "value": "Stenging av avkjørsel",
+              "label": "Regulert stengt avkjørsel"
+            },
+            {
+              "value": "Avkjørsel - både inn og utkjøring",
+              "label": "Regulert avkjørsel - både inn og utkjøring"
+            },
+            {
+              "value": "Avkjørsel - kun innkjøring",
+              "label": "Regulert avkjørsel - kun innkjøring"
+            },
+            {
+              "value": "Avkjørsel - kun utkjøring",
+              "label": "Regulert avkjørsel - kun utkjøring"
+            },
+            {
+              "value": "Brukar",
+              "label": "Regulert brukar"
+            },
+            {
+              "value": "Tunnelåpning",
+              "label": "Regulert tunnelåpning"
+            },
+            {
+              "value": "Eksisterende tre som skal bevares",
+              "label": "Regulert bevaring av eksisterende tre"
+            },
+            {
+              "value": "Regulert nytt tre",
+              "label": "Regulert nytt tre"
+            },
+            {
+              "value": "Regulert møneretning",
+              "label": "Regulert møneretning"
+            }
+          ],
+          "definition": "kodeliste for type juridisk punkt i reguleringsplan."
+        }
+      },
+      {
+        "name": "objektnavn",
+        "type": "CharacterString",
+        "description": "navn til juridisk punkt i plankartet. Anvendes som koblingsnøkkel for å koble kartobjektet (punktet) til planbestemmelsene.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "retningsvektor",
+        "type": "Vector",
+        "description": "retningsvektor i terrenget",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpJuridiskLinje",
+    "description": "linje for juridisk bindende tilleggsinformasjon (pbl. §§ 12-2, 12-3, 12-5 og 12-7)",
+    "attributes": [
+      {
+        "name": "linjeforløp",
+        "type": "GM_Curve",
+        "description": "kurvegeometri som bestemmer linjas forløp på kartet",
+        "cardinality": "1"
+      },
+      {
+        "name": "juridiskLinjetype",
+        "type": "RpJuridiskLinjeType",
+        "description": "kode for type juridisk linje i reguleringsplan, jf. pbl. kap. 12",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "Regulert tomtegrense",
+              "label": "Regulert eiendomsgrense"
+            },
+            {
+              "value": "Eiendomsgrense som skal oppheves",
+              "label": "Eiendomsgrense som oppheves ved vedtak av plan"
+            },
+            {
+              "value": "Bygg, kulturminner, mm. som skal bevares",
+              "label": "Bygg som skal bevares (kun bevaringsområder)"
+            },
+            {
+              "value": "Byggegrense",
+              "label": "grense mellom arealer som kan bebygges og ikke kan bebygges."
+            },
+            {
+              "value": "Planlagt bebyggelse",
+              "label": "Omriss av planlagt bebyggelse"
+            },
+            {
+              "value": "Bebyggelse som inngår i planen",
+              "label": "Omriss av eksisterende bebyggelse som inngår i planen"
+            },
+            {
+              "value": "Bebyggelse som forutsettes fjernet",
+              "label": "Omriss av bebyggelse som forutsettes fjernet"
+            },
+            {
+              "value": "Regulert senterlinje",
+              "label": "Regulert senterlinje"
+            },
+            {
+              "value": "Frisiktlinje",
+              "label": "grenselinje for område som skal ha frisikt ved kjøring mot vegkryss\nLengden av frisiktlinjen er avhengig av tillatt hastighet og vegkrysstype"
+            },
+            {
+              "value": "Regulert kant kjørebane",
+              "label": "Regulert kant kjørebane"
+            },
+            {
+              "value": "Regulert kjørefelt",
+              "label": "Regulert kjørefelt"
+            },
+            {
+              "value": "Regulert parkeringsfelt",
+              "label": "Regulert parkeringsfelt"
+            },
+            {
+              "value": "Regulert fotgjengerfelt",
+              "label": "Regulert fotgjengerfelt"
+            },
+            {
+              "value": "Regulert støyskjerm",
+              "label": "Regulert støyskjerm"
+            },
+            {
+              "value": "Regulert støttemur",
+              "label": "Regulert støttemur"
+            },
+            {
+              "value": "Sikringsgjerde",
+              "label": "Regulert sikringsgjerde"
+            },
+            {
+              "value": "Bru",
+              "label": "Bru"
+            },
+            {
+              "value": "Tunnel",
+              "label": "Tunnel"
+            },
+            {
+              "value": "Måle- og avstandslinje",
+              "label": "linje som viser fastsatt avstand eller radius"
+            },
+            {
+              "value": "Strandlinje sjø",
+              "label": "Strandlinje sjø"
+            },
+            {
+              "value": "Strandlinje vassdrag",
+              "label": "Strandlinje vassdrag"
+            },
+            {
+              "value": "Midtlinje vassdrag",
+              "label": "Midtlinje vassdrag"
+            },
+            {
+              "value": "Markagrense",
+              "label": "Grense for område som omfattes av lov om naturområder i Oslo og nærliggende kommuner (markaloven)."
+            }
+          ],
+          "definition": "kodeliste for type juridisk linje i reguleringsplan."
+        }
+      },
+      {
+        "name": "objektnavn",
+        "type": "CharacterString",
+        "description": "navn til juridisk linje i plankartet. Anvendes som koblingsnøkkel for å koble kartobjektet (linja) til planbestemmelsene.",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    }
+  },
+  {
+    "name": "RpPåskrift",
+    "description": "tekst som er påført plankartet for reguleringsplan (områderegulering og detaljregulering) (pbl. §§ 12-2, 12-3, 12-5 og 12-7)\nEn påskrift presenterer eller gir supplerende informasjon om et kartobjekt. Påskriften skal knyttes til dette kartobjektet ved en assosiasjon, og det skal være posisjonert i samsvar med kartobjektet.\nPåskriftstypen skal være i samsvar med kartobjektet ihht. restriksjoner i modellen.",
+    "attributes": [
+      {
+        "name": "posisjon",
+        "type": "GM_Point",
+        "description": "representasjonspunkt som knytter påskriften geometrisk til et annet kartobjekt",
+        "cardinality": "1"
+      },
+      {
+        "name": "tekststreng",
+        "type": "CharacterString",
+        "description": "påskriftens tekstlige innhold",
+        "cardinality": "1"
+      },
+      {
+        "name": "påskriftType",
+        "type": "PåskriftType",
+        "description": "hva påskriften i plankartet omhandler.\nDet må være samsvar mellom denne egenskapen og det kartobjektet som påskriften refererer til.",
+        "cardinality": "1",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "value": "feltkode",
+              "label": "Feltkode, dvs. navn på et kartobjekt (formålOmråde, hensynsSone, bestemmelseOmråde, osv.)"
+            },
+            {
+              "value": "areal",
+              "label": "Arealet av delflaten som påskriften refererer til"
+            },
+            {
+              "value": "utnytting",
+              "label": "Utnyttingsgrad for formålsområde."
+            },
+            {
+              "value": "målsetting",
+              "label": "Målsatte avstander i kartet.\nReferer til avstandslinje med måltall  (juridisk linje 1259)"
+            },
+            {
+              "value": "radius",
+              "label": "Radius på sirkelbue.\nBrukes på senterlinje for veg og jernbane."
+            },
+            {
+              "value": "kotehøyde",
+              "label": "Høyde over havet."
+            }
+          ],
+          "definition": "kode for hva en påskrift på plankartet omhandler"
+        }
+      },
+      {
+        "name": "tekstplassering",
+        "type": "GM_Primitive",
+        "description": "egenskap for å plassere og rotere tekst på plankartet.  En videreføring av SOSI-formatets geometritype .TEKST\nDersom geometrien er gitt som et punkt, skal det angi startpunktet for teksten, som derfra skal gå vannrett utover til høyre\nDersom geometrien er gitt som linje skal teksten starte i første koordinat, og derfra følge linjas retning.\nDersom egenskapen ikke er gitt, skal teksten plasseres i representasjonspunktet (posisjon).",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "formatering",
+        "type": "Tekstformatering",
+        "description": "egenskapsett for å formatere tekst på plankartet.  En videreføring av utvalgte egenskaper fra SOSI-formatets geometritype .TEKST",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "skrifttype",
+            "type": "CharacterString",
+            "description": "navnet på den skrifttypen eller fonten som benyttes på plankartet.",
+            "cardinality": "0..1"
+          },
+          {
+            "name": "fontStørrelse",
+            "type": "Integer",
+            "description": "fontens størrelse angitt i punkter",
+            "cardinality": "0..1"
+          },
+          {
+            "name": "referansemålestokk",
+            "type": "Integer",
+            "description": "målestokken som teksten er redigert for, dvs. plankartets målestokk. Oppgis som målestokkstall.",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpOmråde",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpArealformålOmråde",
+          "role": "formål",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpBåndleggingSone",
+          "role": "båndlegging",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpHensynSone",
+          "cardinality": "0"
+        },
+        {
+          "target": "RpInfrastrukturSone",
+          "role": "infrastruktur",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpAngittHensynSone",
+          "role": "angittHensyn",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpStøySone",
+          "role": "støy",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpFareSone",
+          "role": "fare",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpGjennomføringSone",
+          "role": "gjennomføring",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpDetaljeringSone",
+          "role": "detaljering",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpSikringSone",
+          "role": "sikring",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpBestemmelseOmråde",
+          "role": "bestemmelseOmråde",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpBestemmelseMidlByggAnlegg",
+          "role": "midlByggAnlegg",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpRegulertHøyde",
+          "role": "regulertHøyde",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpJuridiskPunkt",
+          "role": "juridiskPunkt",
+          "cardinality": "0..1"
+        },
+        {
+          "target": "RpJuridiskLinje",
+          "role": "juridiskLinje",
+          "cardinality": "0..1"
+        }
+      ]
+    }
+  }
+]
