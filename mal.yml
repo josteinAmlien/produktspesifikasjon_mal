@@ -1,15 +1,33 @@
-# metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b   # adm enhet
+# metadataId: c114a146-821f-4570-aefe-a65e67c0edba     # regplanforslag
+# xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Reguleringsplanforslag/Regplanforslag-2023_kodeendring2025.xml
+# product_slug: regplanforslag
+
 # metadataId: 779a554b-fc3e-48a6-b202-561b07e9d4c2   # planlegging igangsatt
-metadataId: c114a146-821f-4570-aefe-a65e67c0edba     # regplanforslag
-output_directory: produktspesifikasjon
-product_slug: regplanforslag
 # product_slug: planleggingIgangsatt
+# xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Arealplan 5.0/PlanleggingIgangsatt.xml
+
+# metadataId: 86d6201a-4e0b-4f61-a1dc-c94164cfd160   ¤ grønnstruktur
+# product_slug: Grønnstruktur
+# xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/FKB/FKB Grønnstruktur.xml
+
+# metadataId: 7d220e23-5835-4f83-ba96-1156c154e566   ¤ landformer
+# product_slug: landformar
+# xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/NGU/LandformerNiN-1.0_Utkast.xml
+
+# metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b   # adm enhet
 # product_slug: admenheter
+
+metadataId: 86d6201a-4e0b-4f61-a1dc-c94164cfd160   ¤ grønnstruktur
+product_slug: Grønnstruktur
+xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/FKB/FKB Grønnstruktur.xml
+
+output_directory: produktspesifikasjon
+
+
 updated: 2026-03-09
 # 
 #ogc_feature_api: https://kos-pygeoapi.atkv3-dev.kartverket.cloud/collections
-#xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Arealplan 5.0/PlanleggingIgangsatt.xml
-xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Reguleringsplanforslag/Regplanforslag-2023_kodeendring2025.xml
+
 #include_only_features:
 #  - Uttak
 #
