@@ -17,9 +17,10 @@
 # metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b   # adm enhet
 # product_slug: admenheter
 
-metadataId: 86d6201a-4e0b-4f61-a1dc-c94164cfd160   # grønnstruktur
-product_slug: Grønnstruktur
-xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/FKB/FKB Grønnstruktur.xml
+metadataId: 7d220e23-5835-4f83-ba96-1156c154e566   # landformer
+product_slug: landformar
+xmi_url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/NGU/LandformerNiN-1.0_Utkast.xml
+
 
 output_directory: produktspesifikasjon
 
