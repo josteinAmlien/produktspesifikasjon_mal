@@ -1,0 +1,109 @@
+@startuml
+title Landformer - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  class LandformFlate <<featureType>> {
+    + førsteDigitaliseringsdato [0..1] : Date
+    + datauttaksdato [0..1] : Date
+    + opphav [0..1] : CharacterString
+    + prosesshistorie [0..1] : CharacterString
+    + oppdateringsdato [0..1] : Date
+    + identifikasjon [1] : Identifikasjon
+    + område [1] : Flate
+    + NiN_Landform [1] : NiN_Landform
+    + NiN_Landformgruppe [1] : NiN_Landformgruppe
+    + NiN_Versjon [1] : NiN_Versjon
+    + egnetMålestokk [0..1] : Integer
+    + geolPåvisningstype [0..1] : GeolPåvisningstype
+    + NiN_Variabel [1] : NiN_Variabel
+  }
+
+  abstract class FellesegenskaperLandform <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class LandformLinje <<featureType>> {
+    + førsteDigitaliseringsdato [0..1] : Date
+    + datauttaksdato [0..1] : Date
+    + opphav [0..1] : CharacterString
+    + prosesshistorie [0..1] : CharacterString
+    + oppdateringsdato [0..1] : Date
+    + identifikasjon [1] : Identifikasjon
+    + grense [1] : Kurve
+    + NiN_Landform [1] : NiN_Landform
+    + NiN_Landformgruppe [1] : NiN_Landformgruppe
+    + NiN_Versjon [1] : NiN_Versjon
+    + NiN_Variabel [1] : NiN_Variabel
+    + egnetMålestokk [0..1] : Integer
+    + kvFormLinjetype [0..1] : KvFormLinjetype
+    + geolPåvisningstype [0..1] : GeolPåvisningstype
+  }
+
+  class Geotopvurdering <<featureType>> {
+    + geotopverdi [1] : Geotopverdi
+    + tilstand [1] : Tilstand
+    + utforming [1] : Utforming
+    + rødlistekategori [1] : Rødlistekategori
+    + trinn_TP1 [1] : Trinn_TP
+    + trinn_TP2 [1] : Trinn_TP
+    + trinn_TS [1] : Trinn_TS
+    + merknad [0..1] : CharacterString
+    + utvalgskriterium [0..1] : CharacterString
+    + lokalitetskvalitet [1] : Lokalitetskvalitet
+    + vurderingsdato [0..1] : Date
+  }
+
+  class "Dekningsområde" as Dekningsomr_de <<featureType>> {
+    + identifikasjon [1] : Identifikasjon
+    + datauttaksdato [0..1] : Date
+    + opphav [0..1] : CharacterString
+    + geodataprodusent [0..1] : CharacterString
+    + område [1] : Flate
+    + NiN_Landform [1] : NiN_Landform
+    + NiN_Versjon [1] : NiN_Versjon
+    + kartleggingsinstruks [1] : URI
+    + prosjektRapport [0..1] : URI
+    + kartleggingsår [0..1] : Integer
+    + kartlagtOmråde [0..1] : CharacterString
+  }
+
+  abstract class "FellesegenskaperDekningsområde" as FellesegenskaperDekningsomr_de <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class Identifikasjon {
+    + lokalId [1] : CharacterString
+    + navnerom [1] : CharacterString
+    + versjonId [0..1] : CharacterString
+  }
+}
+
+  FellesegenskaperLandform <|-- LandformFlate
+  LandformFlate --> Geotopvurdering : Geotopvurdering [0..1]
+  FellesegenskaperLandform <|-- LandformLinje
+  Geotopvurdering --> LandformFlate : LandformFlate [1]
+  FellesegenskaperDekningsomr_de <|-- Dekningsomr_de
+
+@enduml
