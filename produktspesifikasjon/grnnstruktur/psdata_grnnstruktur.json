@@ -1,0 +1,353 @@
+{
+  "title": "FKB-Grønnstruktur",
+  "date": {
+    "creation": "2024-05-15",
+    "revision": "2024-05-29"
+  },
+  "language": "nor",
+  "contact": {
+    "individualName": "Maria Oldeman Lund",
+    "organizationName": "Geovekst",
+    "logo": "https://register.geonorge.no/data/organizations/_geovekst_liten.png",
+    "electronicMailAddress": "gisdrift@nibio.no",
+    "role": "owner"
+  },
+  "identificationSection": {
+    "title": "FKB-Grønnstruktur",
+    "abstract": "FKB-Grønnstruktur 1.0 er et datasett som kombinerer informasjon fra fjernmålingsdata og FKB-data. Datasettet viser vegetasjonsdekke inndelt i tre kategorier av sjikt: feltsjikt, busksjikt og tresjikt. I tillegg vises grå arealer som bygninger og infrastruktur, altså områder uten vegetasjon. \n\nPresisjonsnivået for enkelte egenskaper, særlig de grønne strukturene, vil være lavere enn i tradisjonelle FKB-datasett.\n\nGrønnstrukturkartet etableres ved å kombinere detaljerte offentlige kartdata, som til enhver tid omfatter alle relevante data, satellittdata fra Copernicus-programmet (VHR-opptak via Norsk Romsenter) med oppløsning 2–4 meter og høydedata fra NDH (Nasjonal detaljert høydemodell) med romlig oppløsning 1 meter x 1 meter. I tillegg benyttes informasjon fra SSB Arealbruk for å avgrense kartleggingsområdet og FKB-AR5 for å gi informasjon om jordbruksareal innenfor kartleggingsområdet.",
+    "purpose": {
+      "summary": "Formålet med et nasjonalt grønnstrukturkart er å sikre at alle kommuner har tilgang til lik og oppdatert informasjon om grønne arealer i bebygde områder, inkludert tettsteder med randsone og hyttefelt.\n\nGrønne arealer har mange viktige funksjoner: de tar opp og fordrøyer nedbør, er viktige for biologisk mangfold, bidrar til å regulere temperatur og gir rom for rekreasjon og folkehelse. Informasjonen om grønne og grå strukturer er viktig for å vurdere hvordan utbygging og endringer i arealbruk påvirker opptak og utslipp av klimagasser, lokale økosystemer, håndtering av nedbør og arealenes evne til å regulere temperatur.",
+      "useCase": {
+        "name": "Bruksområde",
+        "summary": "Datasettet er utviklet for bruk i arealplanlegging, miljøforvaltning, klimatilpasning og analyser av økosystemtjenester. Det kan også inngå i byggesaksbehandling og benyttes som grunnlag for delplaner for park og byrom. \n\nGrønnstrukturkartet gir et viktig utgangspunkt for beregning av blå-grønn faktor, utvikling av strategier for håndtering av overvann og klimaberegninger. Kartet kan videreutvikles til temakart som gir detaljert informasjon som kunnskapsgrunnlag i kommunens planarbeid."
+      }
+    },
+    "spatialRepresentationType": "Vektor",
+    "spatialResolution": {
+      "equivalentScale": "1:1000 og mindre"
+    },
+    "uniqueId": "86d6201a-4e0b-4f61-a1dc-c94164cfd160",
+    "keyword": [
+      "grønnstruktur",
+      "bebygde områder",
+      "sjikthøyder",
+      "Norges fastland",
+      "Heldekkende innenfor kartlagt område",
+      "Det offentlige kartgrunnlaget",
+      "geodataloven",
+      "Norge digitalt",
+      "Basis geodata"
+    ],
+    "restriction": {
+      "legalConstraints": {
+        "accessConstraints": "Norge digitalt begrenset",
+        "useConstraints": "Lisens",
+        "license": "Norge digitalt-lisens",
+        "licenseUrl": "https://www.geonorge.no/Geodataarbeid/geografisk-infrastruktur/Norge-digitalt/Avtaler-og-maler/Norge-digitalt-lisens/",
+        "otherConstraints": "Geovekst"
+      },
+      "securityConstraints": {
+        "classification": "Ugradert"
+      }
+    },
+    "contact": [
+      {
+        "individualName": "Maria Oldeman Lund",
+        "organizationName": "Geovekst",
+        "electronicMailAddress": "gisdrift@nibio.no",
+        "role": "owner"
+      },
+      {
+        "individualName": "Christina Sogge",
+        "organizationName": "Geovekst",
+        "electronicMailAddress": "gisdrift@nibio.no",
+        "role": "pointOfContact"
+      },
+      {
+        "individualName": "Ingvild Nystuen",
+        "organizationName": "Geovekst",
+        "electronicMailAddress": "gisdrift@nibio.no",
+        "role": "publisher"
+      }
+    ],
+    "maintenance": "Årlig",
+    "extent": {
+      "geographicElement": {
+        "westBoundLongitude": "2.0",
+        "eastBoundLongitude": "33.0",
+        "southBoundLatitude": "57.0",
+        "northBoundLatitude": "72.0"
+      },
+      "temporalElement": {
+        "timePeriod": {
+          "beginPosition": "2024-05-15",
+          "endPosition": "2024-05-29"
+        }
+      }
+    },
+    "date": {
+      "creation": "2024-05-15",
+      "publication": "2024-05-15",
+      "revision": "2024-05-29"
+    },
+    "language": "nor"
+  },
+  "scopeSection": [
+    {
+      "specificationScope": {
+        "scopeIdentification": "hele datasettet",
+        "level": "dataset",
+        "extent": {
+          "description": "National"
+        }
+      }
+    }
+  ],
+  "dataContentAndStructureSection": {
+    "narrativeDescription": "Datasettet er utviklet for bruk i arealplanlegging, miljøforvaltning, klimatilpasning og analyser av økosystemtjenester. Det kan også inngå i byggesaksbehandling og benyttes som grunnlag for delplaner for park og byrom. \n\nGrønnstrukturkartet gir et viktig utgangspunkt for beregning av blå-grønn faktor, utvikling av strategier for håndtering av overvann og klimaberegninger. Kartet kan videreutvikles til temakart som gir detaljert informasjon som kunnskapsgrunnlag i kommunens planarbeid."
+  },
+  "referenceSystemSection": {
+    "spatialReferenceSystem": [
+      {
+        "code": "EPSG:25832",
+        "name": "EUREF89 UTM sone 32, 2d"
+      },
+      {
+        "code": "EPSG:25833",
+        "name": "EUREF89 UTM sone 33, 2d"
+      },
+      {
+        "code": "EPSG:25835",
+        "name": "EUREF89 UTM sone 35, 2d"
+      },
+      {
+        "code": "EPSG:4258",
+        "name": "EUREF 89 Geografisk (ETRS 89) 2d"
+      },
+      {
+        "code": "EPSG:25832",
+        "name": "EUREF89 UTM sone 32, 2d"
+      }
+    ]
+  },
+  "dataQualitySection": {
+    "scope": {
+      "level": "dataset"
+    },
+    "report": [
+      {
+        "nameOfMeasure": "SOSI produktspesifikasjon: FKB Grønnstruktur",
+        "measureDescription": "Dataene er ikke vurdert iht produktspesifikasjonen",
+        "descriptiveResult": "Dataene er ikke vurdert iht produktspesifikasjonen"
+      },
+      {
+        "nameOfMeasure": "Sosi applikasjonsskjema",
+        "measureDescription": "GML-filer er ikke vurdert i henhold til applikasjonsskjema",
+        "descriptiveResult": "GML-filer er ikke vurdert i henhold til applikasjonsskjema"
+      },
+      {
+        "nameOfMeasure": "Prosentvis oppfyllelse av FAIR-prinsipper",
+        "measureDescription": "Angir fullstendighet i forhold til krav fra FAIR-prinsippene (The FAIR Guiding Principles for scientific data management and stewardship)",
+        "result": "83"
+      },
+      {
+        "nameOfMeasure": "FAIR",
+        "result": "Prosentvis oppfyllelse av FAIR-prinsipper: 83%"
+      }
+    ]
+  },
+  "maintenanceSection": {
+    "maintenanceAndUpdateFrequency": "Årlig",
+    "maintenanceAndUpdateStatement": "Kontinuerlig oppdatert"
+  },
+  "dataCaptureAndProductionSection": {
+    "DataAcquisitionAndProcessing": {
+      "processStep": [
+        {
+          "description": "Datasettet er heldekkende innenfor kartleggingsområdet og følger nasjonale kvalitetskrav for klassifisering. \n\nKlassifiseringen av grønne og grå arealer bygger på NDVI fra VHR-satellittbilder og høydedata fra NDH. Kvaliteten kan variere mellom områder fordi satellittmosaikken består av opptak fra ulike datoer og satellitter, og skyer eller skygger kan redusere nøyaktigheten. I utgangspunktet skal VHR-mosaikken som benyttes, være skyfri. Det kan likevel forekomme noen områder med skyer. Skyer og skygge fra terreng og skyer vil redusere nøyaktigheten på klassifikasjonen og kan medføre at kvalitetskravene ikke oppnås i slike områder.\n\nHøydedata i arealfigurene er basert på verdiene i benyttet høydemodell (NDH). Høyde på vegetasjonen vil i utgangspunktet være like god som høydemodellen som er blitt brukt. Vegetasjonen blir delt i arealfigurer, og i denne prosessen blir arealfigurene generalisert for å få ønsket størrelse og form. Tresjikt har høyest presisjon (maks 1 % feilklassifisering), mens øvrige sjikt har noe høyere toleranse. Objekter fra andre FKB-datasett generaliseres for å passe inn i grønnstrukturkartet. Minste kartleggingsenhet er satt til 5 m2. \n\nMer detaljert beskrivelse av kvalitetskrav og kartkontroll er beskrevet i kapittel 7 i produktspesifikasjonen."
+        }
+      ]
+    }
+  },
+  "portrayal": {
+    "name": "Tegneregler",
+    "linkage": "https://register.geonorge.no/tegneregler/fkb-grønnstruktur"
+  },
+  "deliverySection": [
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "kommunevis, landsfiler",
+          "deliveryMediumName": "Geonorge nedlastning",
+          "deliveryService": {
+            "serviceEndpoint": "https://nedlasting.geonorge.no/api/capabilities/",
+            "serviceProperty": {
+              "type": "Geonorge nedlastning",
+              "value": "GEONORGE:DOWNLOAD"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "FGDB"
+          },
+          {
+            "formatName": "GML"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "kommunevis, landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "http://nedlasting.geonorge.no/geonorge/ATOM-feeds/FKB_Gronnstruktur_AtomFeedFGDB.xml",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "FGDB"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "kommunevis, landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "http://nedlasting.geonorge.no/geonorge/ATOM-feeds/FKB-Gronnstruktur_AtomFeedFGDB.xml",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "FGDB"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "kommunevis, landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "http://nedlasting.geonorge.no/geonorge/ATOM-feeds/FKB_Gronnstruktur_AtomFeedGML.xml",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GML"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "kommunevis, landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "http://nedlasting.geonorge.no/geonorge/ATOM-feeds/FKB-Gronnstruktur_AtomFeedGML.xml",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GML"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "FKB-Grønnstruktur - WMS",
+          "deliveryService": {
+            "serviceEndpoint": "https://wms.nibio.no/cgi-bin/gronnstruktur?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0",
+            "serviceProperty": {
+              "type": "FKB-Grønnstruktur - WMS",
+              "value": "WMS-tjeneste"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "wms",
+            "version": "1.3.0"
+          }
+        ],
+        "deliveryScope": "Tjeneste"
+      }
+    }
+  ],
+  "metadataSection": {
+    "metadataStandard": "ISO19115",
+    "metadataStandardVersion": "2003",
+    "metadataDate": "2026-03-09",
+    "language": "nor",
+    "contact": {
+      "organizationName": "Geovekst",
+      "individualName": "Christina Sogge",
+      "logo": "https://register.geonorge.no/data/organizations/_geovekst_liten.png",
+      "electronicMailAddress": "gisdrift@nibio.no",
+      "role": "pointOfContact"
+    },
+    "metadataIdentifier": {
+      "authority": "Geonorge",
+      "code": "86d6201a-4e0b-4f61-a1dc-c94164cfd160",
+      "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
+      "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/86d6201a-4e0b-4f61-a1dc-c94164cfd160"
+    },
+    "links": [
+      {
+        "href": "https://www.geonorge.no/geonetwork/srv/nor/csw?service=CSW&request=GetRecordById&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full&id=86d6201a-4e0b-4f61-a1dc-c94164cfd160",
+        "rel": "describedby",
+        "type": "application/xml",
+        "title": "Metadata (ISO 19139)"
+      },
+      {
+        "href": "https://www.nibio.no/tema/jord/arealressurser/gronnstruktur?locationfilter=true",
+        "rel": "about",
+        "type": "text/html",
+        "title": "Produktside"
+      },
+      {
+        "href": "https://nedlasting.geonorge.no/api/capabilities/",
+        "rel": "enclosure",
+        "type": "text/html",
+        "title": "Nedlasting"
+      },
+      {
+        "href": "#!?zoom=3&lon=306722&lat=7197864&wms=https://wms.nibio.no/cgi-bin/gronnstruktur",
+        "rel": "service",
+        "type": "text/html",
+        "title": "Tjeneste"
+      },
+      {
+        "href": "https://wms.nibio.no/cgi-bin/gronnstruktur?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0",
+        "rel": "service",
+        "type": "application/xml",
+        "title": "Tjeneste-distribusjon"
+      }
+    ]
+  }
+}
