@@ -1,0 +1,396 @@
+@startuml
+title Planområde for planlegging igangsatt - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  class Felles <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class ops <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class Helsesamvirke <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + samvirkeType [1] : TypeHelsesamvirke
+  }
+
+  abstract class Hendelse <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class PlanlagtHendelse <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + planlagtHendelsesType [1] : TypePlanlagtHendelse
+  }
+
+  class Utbredelse <<featureType>> {
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + flate [0..1] : Flate
+    + kurve [0..1] : Kurve
+    + utbredelsestype [1] : TypeUtbredelse
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class SammensattHendelse <<featureType>> {
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+  }
+
+  class AnnenHendelse <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+  }
+
+  class Sikkerhetshendelse <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + sikkerhetshendelseType [1] : TypeSikkerhetshendelse
+  }
+
+  class Naturhendelse <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + naturhendelseType [1] : TypeNaturhendelse
+  }
+
+  class Ulykke <<featureType>> {
+    + punkt [1] : Punkt
+    + opphavsaktør [1] : Hovedaktør
+    + innmelder [1..*] : Observatør
+    + beskrivelse [0..1] : CharacterString
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [1] : Kompleksitet
+    + aktørPerspektiv [1..*] : AktørPerspektiv
+    + lokalitetstype [1] : Lokalitetstype
+    + øvelse [1] : Boolean
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + ulykkeType [1] : TypeUlykke
+  }
+
+  abstract class Hendelsesrelatert <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class Objekt <<featureType>> {
+    + kommentar [0..*] : CharacterString
+    + registreringstidspunkt [1] : Date
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + typeObjekt [1] : TypeObject
+    + posisjon [1] : GM_Object
+    + posisjonskvalitet [1] : Posisjonskvalitet
+  }
+
+  class Observasjon <<featureType>> {
+    + kommentar [0..*] : CharacterString
+    + registreringstidspunkt [1] : Date
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + observasjonsmåte [1] : Observasjonsmåte
+    + observasjonskvalitet [0..1] : Observasjonskvalitet
+    + observasjonFraTid [1] : Date
+    + observasjonTilTid [1] : Date
+    + objektPosisjon [0..1] : GM_Objekt
+    + observertFraPosisjon [1] : GM_Object
+    + posisjonskvalitet [0..1] : Posisjonskvalitet
+    + observatør [0..1] : Observatør
+  }
+
+  abstract class Ressurs <<featureType>> {
+    ' Ingen attributter
+  }
+
+  class Drone <<featureType>> {
+    + posisjon [1] : Punkt
+    + aktør [1] : Aktør
+    + ressursID [1] : CharacterString
+    + estimertAnkomsttid [0..1] : Date
+    + tilgjengelighetOps [1] : TilgjengelighetOps
+    + tilgjengelighetHendelse [1] : TilgjengelighetHendelse
+    + kommentar [0..1] : CharacterString
+    + status [1] : CharacterString
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + synsfelt [0..1] : Flate
+    + dronetype [1] : TypeDrone
+  }
+
+  class Depot <<featureType>> {
+    + posisjon [1] : Punkt
+    + aktør [1] : Aktør
+    + ressursID [1] : CharacterString
+    + estimertAnkomsttid [0..1] : Date
+    + tilgjengelighetOps [1] : TilgjengelighetOps
+    + tilgjengelighetHendelse [1] : TilgjengelighetHendelse
+    + kommentar [0..1] : CharacterString
+    + status [1] : CharacterString
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + utstyr [0..*] : TypeUtstyr
+  }
+
+  class AnnenRessurs <<featureType>> {
+    + posisjon [1] : Punkt
+    + aktør [1] : Aktør
+    + ressursID [1] : CharacterString
+    + estimertAnkomsttid [0..1] : Date
+    + tilgjengelighetOps [1] : TilgjengelighetOps
+    + tilgjengelighetHendelse [1] : TilgjengelighetHendelse
+    + kommentar [0..1] : CharacterString
+    + status [1] : CharacterString
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + type [1] : TypeAnnenRessurs
+    + utstyr [0..*] : TypeUtstyr
+  }
+
+  class Transportmiddel <<featureType>> {
+    + posisjon [1] : Punkt
+    + aktør [1] : Aktør
+    + ressursID [1] : CharacterString
+    + estimertAnkomsttid [0..1] : Date
+    + tilgjengelighetOps [1] : TilgjengelighetOps
+    + tilgjengelighetHendelse [1] : TilgjengelighetHendelse
+    + kommentar [0..1] : CharacterString
+    + status [1] : CharacterString
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + type [1] : TypeTransportmiddel
+    + rolle [1] : TypeRolle
+    + utstyr [0..*] : TypeUtstyr
+  }
+
+  class Personell <<featureType>> {
+    + posisjon [1] : Punkt
+    + aktør [1] : Aktør
+    + ressursID [1] : CharacterString
+    + estimertAnkomsttid [0..1] : Date
+    + tilgjengelighetOps [1] : TilgjengelighetOps
+    + tilgjengelighetHendelse [1] : TilgjengelighetHendelse
+    + kommentar [0..1] : CharacterString
+    + status [1] : CharacterString
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + rolle [0..1] : TypeRolle
+    + typeEkspert [0..1] : TypeEkspert
+    + utstyr [0..*] : TypeUtstyr
+  }
+
+  class Tiltakslokasjon <<featureType>> {
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + posisjon [1] : CharacterString
+    + type [1] : TypeTiltakslokasjon
+    + aktør [1] : Aktør
+    + status [1] : Status
+    + prioritetTilak [1] : Integer
+    + typeFaresone [0..1] : TypeFaresone
+    + typeRute [0..1] : TypeRute
+    + bevarÅsted [0..1] : Boolean
+    + kommentar [0..1] : CharacterString
+  }
+
+  class Kontekst <<featureType>> {
+    + identifikasjon [1] : uuid
+    + betegnelse [0..1] : CharacterString
+    + førsteRegistreringstidspunkt [1] : Date
+    + oppdateringstidspunkt [1] : Date
+    + geometriobjekt [0..1] : URI
+    + type [1] : TypeKontekst
+    + aktør [1] : Aktør
+    + kommentar [0..1] : CharacterString
+    + posisjon [1] : Posisjon
+  }
+
+  class "Observatør" as Observat_r {
+    + kontaktinformasjon [1] : CharacterStreng
+    + OPSoperatør [1] : Boolean
+    + sensor [1] : Boolean
+  }
+
+  class "AktørPerspektiv" as Akt_rPerspektiv {
+    + aktør [1] : Hovedaktør
+    + prioritet [1] : PrioritetHendelse
+    + kompleksitet [0..1] : Kompleksitet
+  }
+
+  class Posisjon {
+    + geometri [1] : GM_Object
+    + Referanse [0..1] : Identifikasjon
+  }
+
+  class Identifikasjon {
+    + lokalId [1] : uuid
+    + navnerom [1] : CharacterString
+    + versjonId [0..1] : CharacterString
+  }
+}
+
+  ops --> Hendelse : hendelse [0..*]
+  ops --> Ressurs : potesiellResserus [0..*]
+  Hendelse <|-- Helsesamvirke
+  Felles <|-- Hendelse
+  Hendelse --> ops : ops [1]
+  Hendelse --> Utbredelse : framskriving [0..*]
+  Hendelse --> Objekt : objekt [0..*]
+  Hendelse --> Utbredelse : utbredelse [0..*]
+  Hendelse --> Tiltakslokasjon : tiltakslokasjon [0..*]
+  Hendelse --> SammensattHendelse : sammensattHendlelse [0..1]
+  Hendelse --> Ressurs : tilordnetRessurs [0..*]
+  Hendelse --> Kontekst : kontekst [0..*]
+  Hendelse --> Observat_r : innmelder [1..*]
+  Hendelse <|-- PlanlagtHendelse
+  Felles <|-- Utbredelse
+  Felles <|-- SammensattHendelse
+  SammensattHendelse --> Hendelse : hendelse [0..*]
+  Hendelse <|-- AnnenHendelse
+  Hendelse <|-- Sikkerhetshendelse
+  Hendelse <|-- Naturhendelse
+  Hendelse <|-- Ulykke
+  Felles <|-- Hendelsesrelatert
+  Hendelsesrelatert <|-- Objekt
+  Objekt --> Hendelse
+  Objekt --> Tiltakslokasjon
+  Objekt --> Observasjon : observasjon [1..*]
+  Hendelsesrelatert <|-- Observasjon
+  Observasjon --> Objekt : objekt [1..*]
+  Observasjon --> Observat_r : observatør [1]
+  Felles <|-- Ressurs
+  Ressurs --> Hendelse : hendelse [0..1]
+  Ressurs --> Tiltakslokasjon : [0..*]
+  Ressurs <|-- Drone
+  Drone --> Personell : droneoperatør [0..1]
+  Ressurs <|-- Depot
+  Ressurs <|-- AnnenRessurs
+  Ressurs <|-- Transportmiddel
+  Ressurs <|-- Personell
+  Personell --> Transportmiddel : transportmiddel [0..1]
+  Felles <|-- Tiltakslokasjon
+  Tiltakslokasjon --> Hendelse : hendelse
+  Tiltakslokasjon --> Objekt : lokasjon [0..1]
+  Tiltakslokasjon --> Ressurs
+  Tiltakslokasjon --> X___TiltakOppgave
+  Felles <|-- Kontekst
+  Kontekst --> Hendelse : hendelse
+
+@enduml
